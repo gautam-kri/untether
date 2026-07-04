@@ -1,0 +1,25 @@
+/* Untether design tokens — palette, easing, and motion primitives. */
+:root {
+  --ink-black: #060606;
+  --accent-red: #d93b3c;
+  --teal-text: #81adaa;
+  --blend-teal: #435c59;
+  --line-white: #ffffff;
+  --body-white: #f2f1ec;
+  --hairline: rgba(129, 173, 170, 0.25);
+
+  --ease-mech: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-wipe: 700ms;
+  --dur-ui: 200ms;
+
+  /* Continuous-stroke shutter transition */
+  --shutter-fill: #101312;
+  --shutter-edge: #81adaa;
+  --dur-shutter: 780ms;
+  --dur-route: 600ms;
+  --ease-shutter: cubic-bezier(0.45, 0, 0.55, 1);
+
+  --nav-h: 96px;
+  /* Navbar height including the iOS status-bar safe area (0 elsewhere) */
+  --nav-total: calc(96px + env(safe-area-inset-top, 0px));
+}

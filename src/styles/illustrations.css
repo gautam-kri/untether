@@ -1,0 +1,84 @@
+/* Shared style for all hand-authored SVG artwork. */
+.u-illus {
+  color: var(--line-white);
+  display: block;
+}
+
+/* Stroke primitives */
+.u-illus-line {
+  fill: none;
+  stroke: var(--line-white);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.9;
+}
+
+.u-illus-lead {
+  fill: none;
+  stroke: var(--teal-text);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.7;
+}
+
+.u-callout-dot {
+  fill: none;
+  stroke: var(--teal-text);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.85;
+}
+
+.u-illus-hatch {
+  fill: none;
+  stroke: var(--line-white);
+  stroke-width: 1;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.35;
+}
+
+.u-illus-anno {
+  font-family: 'TT2020 Base', ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  fill: var(--teal-text);
+  font-size: 11px;
+}
+
+/* Draw-on: armed = hidden, played = trace in. Reduced motion keeps
+   everything at its resting (visible) state. */
+.u-illus.is-armed [data-draw] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.u-illus.is-armed .u-illus-anno,
+.u-illus.is-armed .u-illus-hatch {
+  opacity: 0;
+}
+.u-illus.is-played [data-draw] {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1200ms var(--ease-mech);
+}
+.u-illus.is-played .u-illus-anno {
+  opacity: 1;
+  transition: opacity 500ms var(--ease-mech) 700ms;
+}
+.u-illus.is-played .u-illus-hatch {
+  opacity: 0.35;
+  transition: opacity 700ms var(--ease-mech) 400ms;
+}
+
+/* Shutter-eye bars: slide across the iris, ±8px. */
+.u-shutter-bars {
+  animation: u-shutter 4s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .u-shutter-bars {
+    animation: none;
+  }
+}

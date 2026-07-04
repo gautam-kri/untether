@@ -1,0 +1,573 @@
+@import './styles/tokens.css';
+@import './styles/illustrations.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Fonts                                                               */
+/* ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'TT2020 StyleB';
+  src: url('/fonts/TT2020StyleB-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT2020 StyleB';
+  src: url('/fonts/TT2020StyleB-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT2020 Base';
+  src: url('/fonts/TT2020Base-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT2020 Base';
+  src: url('/fonts/TT2020Base-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--ink-black);
+    overflow-x: hidden;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: var(--ink-black);
+    color: var(--body-white);
+    font-family: 'TT2020 Base', ui-monospace, monospace;
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent-red);
+    color: var(--ink-black);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-red);
+    outline-offset: 2px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Typography helpers                                                  */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .u-display {
+    font-family: 'URW DIN Arabic Condensed Black', 'URW DIN Arabic Cond', 'URW DIN Arabic',
+      'Bahnschrift', 'Arial Narrow', system-ui, sans-serif;
+    font-stretch: 75%;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--body-white);
+    line-height: 1.02;
+  }
+
+  .u-hero-wordmark {
+    font-size: clamp(2.5rem, 10.5vw, 9rem);
+    white-space: nowrap;
+  }
+
+  .u-section-heading {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .u-tile-title {
+    font-size: 1.25rem;
+  }
+
+  .u-body {
+    font-family: 'TT2020 Base', ui-monospace, monospace;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--body-white);
+    max-width: 62ch;
+  }
+
+  .u-body-teal {
+    color: var(--teal-text);
+  }
+
+  .u-annotation {
+    font-family: 'TT2020 Base', ui-monospace, monospace;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-text);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion utilities                                                    */
+/* ------------------------------------------------------------------ */
+@keyframes u-scroll-line {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes u-float {
+  0% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(6px);
+  }
+}
+
+
+@keyframes u-letter-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Continuous-stroke shutter transition. Bars are 400vw wide (see wipe.tsx);
+   with the symmetric --ease-shutter and 35ms stagger that width guarantees a
+   full-cover window (~140ms) that contains the t=500ms swap. Animate transform
+   only, and use translate3d so Safari keeps each bar on the compositor. */
+@keyframes u-shutter-ltr {
+  from {
+    transform: translate3d(-400vw, 0, 0);
+  }
+  to {
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+@keyframes u-shutter-rtl {
+  from {
+    transform: translate3d(100vw, 0, 0);
+  }
+  to {
+    transform: translate3d(-400vw, 0, 0);
+  }
+}
+/* Route panel (180vw, single element, no stagger) */
+@keyframes u-route-ltr {
+  from {
+    transform: translate3d(-180vw, 0, 0);
+  }
+  to {
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+/* Fixed, inset-sized, hard-clipping overlay that holds the bars. No viewport
+   units for its own size — inset-based only — so Safari's dynamic URL bar can't
+   change its size mid-gesture. `contain: strict` isolates its layout/paint. */
+.u-shutter-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+/* One shutter bar: fully-opaque fill, tiled-bitmap hatch, teal leading edge.
+   The hatch is a once-painted SVG tile (not a per-frame-rasterized gradient).
+   Only transform animates; will-change promotes it to its own layer. */
+.u-shutter-bar {
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  background-color: var(--shutter-fill);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 8 L8 0' stroke='%2381ADAA' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.u-shutter-bar[data-dir='1'] {
+  border-right: 1px solid rgba(129, 173, 170, 0.6);
+}
+.u-shutter-bar[data-dir='-1'] {
+  border-left: 1px solid rgba(129, 173, 170, 0.6);
+}
+
+/* Route-change shutter panel — fully opaque, same tiled hatch */
+.u-route-shutter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 180vw;
+  opacity: 1;
+  background-color: var(--shutter-fill);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 8 L8 0' stroke='%2381ADAA' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  border-right: 1px solid rgba(129, 173, 170, 0.6);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes u-logo-wipe {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes u-logo-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes u-logo-fill {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes u-shutter {
+  from {
+    transform: translateX(-8px);
+  }
+  to {
+    transform: translateX(8px);
+  }
+}
+
+/* Contact form fields */
+.u-field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--hairline);
+  border-radius: 2px;
+  color: var(--body-white);
+  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 8px 2px;
+  outline: none;
+  transition: border-color var(--dur-ui) var(--ease-mech);
+}
+.u-field:focus {
+  border-bottom-color: var(--accent-red);
+}
+.u-field.is-invalid {
+  border-bottom-color: var(--accent-red);
+}
+/* Suppress native autofill styling */
+.u-field:-webkit-autofill,
+.u-field:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--body-white);
+  transition: background-color 9999s ease-in-out 0s;
+  box-shadow: 0 0 0 1000px transparent inset;
+}
+
+/* Hero wordmark: logo tracks the cap height of the wordmark and sits inline */
+.u-hero-lockup {
+  font-size: clamp(2.5rem, 10.5vw, 9rem);
+  gap: 0.16em;
+}
+.u-hero-logo {
+  flex: none;
+  width: 0.74em;
+  height: 0.74em;
+}
+
+/* Hero motion */
+.u-hero-float {
+  animation: u-float 6s ease-in-out infinite alternate;
+}
+.u-scroll-line {
+  display: block;
+  width: 1.5px;
+  height: 24px;
+  background: var(--accent-red);
+  transform-origin: top center;
+  animation: u-scroll-line 1.6s var(--ease-mech) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .u-hero-float,
+  .u-scroll-line {
+    animation: none;
+  }
+}
+
+/* Bordered tile with hover lift */
+.u-tile {
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  background: transparent;
+  transition: border-color var(--dur-ui) var(--ease-mech), transform var(--dur-ui) var(--ease-mech);
+}
+.u-tile:hover {
+  border-color: var(--accent-red);
+  transform: translateY(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .u-tile:hover {
+    transform: none;
+  }
+}
+
+/* Navigation bar */
+.u-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  background: rgba(6, 6, 6, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--hairline);
+  /* Extend up into the iOS status-bar safe area; content stays below it. */
+  height: var(--nav-total);
+  padding-top: env(safe-area-inset-top, 0px);
+  box-sizing: border-box;
+}
+/* Suspend the backdrop blur while any transition runs — Safari re-blurs the
+   whole strip every frame as the bars sweep behind it, which competes with the
+   bar animation. Restored 100ms after the transition ends (see transition.ts). */
+.u-transition-active .u-navbar {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--ink-black);
+}
+
+/* Enlarged click/tap target for text links (visual position unchanged) */
+.u-hit {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 10px;
+  margin: -12px -10px;
+}
+
+/* Right-side progress navigator */
+.u-prognav {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 45;
+}
+.u-prognav-btn {
+  position: relative;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.u-prognav-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--teal-text);
+  box-sizing: border-box;
+  transition: background 300ms var(--ease-mech);
+}
+.u-prognav-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity var(--dur-ui) var(--ease-mech), transform var(--dur-ui) var(--ease-mech);
+}
+.u-prognav-btn:hover .u-prognav-label,
+.u-prognav-btn:focus-visible .u-prognav-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+.u-prognav-btn:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .u-prognav {
+    display: none;
+  }
+}
+
+/* Custom reticle cursor */
+.u-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity var(--dur-ui) var(--ease-mech);
+  will-change: transform;
+}
+.u-cursor-dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  left: -1.5px;
+  top: -1.5px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  transition: background var(--dur-ui) var(--ease-mech);
+}
+.u-cursor-tick {
+  position: absolute;
+  background: var(--line-white);
+  transition: opacity var(--dur-ui) var(--ease-mech), transform var(--dur-ui) var(--ease-mech);
+}
+.u-tick-t {
+  width: 1.5px;
+  height: 6px;
+  left: -0.75px;
+  top: -10px;
+}
+.u-tick-b {
+  width: 1.5px;
+  height: 6px;
+  left: -0.75px;
+  top: 4px;
+}
+.u-tick-l {
+  width: 6px;
+  height: 1.5px;
+  left: -10px;
+  top: -0.75px;
+}
+.u-tick-r {
+  width: 6px;
+  height: 1.5px;
+  left: 4px;
+  top: -0.75px;
+}
+.u-cursor-br {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid var(--accent-red);
+  opacity: 0;
+  left: -4px;
+  top: -4px;
+  transition: opacity var(--dur-ui) var(--ease-mech), left var(--dur-ui) var(--ease-mech),
+    top var(--dur-ui) var(--ease-mech);
+}
+.u-br-tl {
+  border-right: 0;
+  border-bottom: 0;
+}
+.u-br-tr {
+  border-left: 0;
+  border-bottom: 0;
+}
+.u-br-br {
+  border-left: 0;
+  border-top: 0;
+}
+.u-br-bl {
+  border-right: 0;
+  border-top: 0;
+}
+.u-cursor[data-mode='active'] .u-cursor-dot {
+  background: var(--line-white);
+}
+.u-cursor[data-mode='active'] .u-cursor-tick {
+  opacity: 0;
+  transform: rotate(45deg);
+}
+.u-cursor[data-mode='active'] .u-br-tl {
+  opacity: 1;
+  left: -14px;
+  top: -14px;
+}
+.u-cursor[data-mode='active'] .u-br-tr {
+  opacity: 1;
+  left: 6px;
+  top: -14px;
+}
+.u-cursor[data-mode='active'] .u-br-br {
+  opacity: 1;
+  left: 6px;
+  top: 6px;
+}
+.u-cursor[data-mode='active'] .u-br-bl {
+  opacity: 1;
+  left: -14px;
+  top: 6px;
+}
+
+/* Cursor: hide native pointer only on fine-pointer devices with the
+   custom cursor mounted. */
+@media (pointer: fine) {
+  body.u-has-cursor,
+  body.u-has-cursor a,
+  body.u-has-cursor button,
+  body.u-has-cursor [role='button'] {
+    cursor: none;
+  }
+  body.u-has-cursor input,
+  body.u-has-cursor textarea,
+  body.u-has-cursor select {
+    cursor: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
