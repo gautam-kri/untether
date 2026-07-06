@@ -5,3 +5,9 @@ dist
 .DS_Store
 *.local
 *.log
+
+.vercel
+.env*
+
+# raw source photo — only the graded public/founders.jpg ships
+fondlers.jpg

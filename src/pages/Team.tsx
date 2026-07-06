@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
-import PortraitPlaceholder from '../illustrations/PortraitPlaceholder';
+import FoundersPhoto from '../components/FoundersPhoto';
 import { Reveal } from '../lib/reveal';
 
 const TEAM = [
@@ -26,24 +26,34 @@ export default function Team() {
   return (
     <PageShell>
       <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10">
-        <Reveal index={0}>
-          <Kicker>TEAM</Kicker>
-        </Reveal>
-        <Reveal index={1} className="mt-5">
-          <SectionHeading as="h1">Two people, one obsession.</SectionHeading>
-        </Reveal>
-        <Reveal index={2} as="p" className="u-body u-body-teal mt-6">
-          Untether is built by a small team that believes the most personal technology ever made
-          should also be the most private.
-        </Reveal>
+        <div className="grid items-center gap-12 min-[900px]:grid-cols-[1fr_minmax(320px,420px)]">
+          <div>
+            <Reveal index={0}>
+              <Kicker>TEAM</Kicker>
+            </Reveal>
+            <Reveal index={1} className="mt-5">
+              <SectionHeading as="h1">Two people, one obsession.</SectionHeading>
+            </Reveal>
+            <Reveal index={2} as="p" className="u-body u-body-teal mt-6">
+              Untether is built by a small team that believes the most personal technology ever made
+              should also be the most private.
+            </Reveal>
+          </div>
 
-        <div className="mt-16 grid gap-12 min-[700px]:grid-cols-2">
+          <Reveal index={3}>
+            <FoundersPhoto />
+          </Reveal>
+        </div>
+
+        <div className="mt-16 grid gap-px sm:grid-cols-2">
           {TEAM.map((m, i) => (
-            <Reveal key={m.name} index={3 + i} className="flex flex-col items-start">
-              <div style={{ width: '220px', height: '220px' }} className="text-body">
-                <PortraitPlaceholder label={m.name} />
-              </div>
-              <h2 className="u-display u-tile-title mt-6">{m.name}</h2>
+            <Reveal
+              key={m.name}
+              index={4 + i}
+              className="flex flex-col items-start pt-6 sm:px-8 sm:first:pl-0"
+              style={{ borderTop: '1px solid var(--hairline)' }}
+            >
+              <h2 className="u-display u-tile-title">{m.name}</h2>
               <p
                 className="u-annotation mt-2"
                 style={{
