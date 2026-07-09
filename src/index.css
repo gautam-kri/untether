@@ -196,9 +196,10 @@
   }
 }
 
-/* Fixed, inset-sized, hard-clipping overlay that holds the bars. No viewport
-   units for its own size — inset-based only — so Safari's dynamic URL bar can't
-   change its size mid-gesture. `contain: strict` isolates its layout/paint. */
+/* Fixed, inset-sized, clipping overlay that holds the bars. No viewport units
+   for its own size — inset-based only — so Safari's dynamic URL bar can't
+   change its size mid-gesture. (No `contain: size`: iOS Safari mis-sizes a
+   size-contained fixed element, which opened seams the page leaked through.) */
 .u-shutter-overlay {
   position: fixed;
   top: 0;
@@ -207,20 +208,44 @@
   left: 0;
   overflow: hidden;
   pointer-events: none;
-  contain: strict;
 }
 
-/* One shutter bar: fully-opaque fill, tiled-bitmap hatch, teal leading edge.
-   The hatch is a once-painted SVG tile (not a per-frame-rasterized gradient).
-   Only transform animates; will-change promotes it to its own layer. */
+/* Solid, opaque, non-transformed cover behind the bars. Its opacity plateaus at
+   1 across the swap window, so the section is swapped under a guaranteed-opaque
+   layer even if Safari drops or mis-paints an animated bar layer. */
+.u-shutter-cover {
+  position: absolute;
+  inset: 0;
+  background: var(--shutter-fill);
+  opacity: 0;
+  animation: u-shutter-cover-fade var(--dur-shutter) linear both;
+}
+@keyframes u-shutter-cover-fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+  }
+  84% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* One shutter bar: a flat, fully-opaque solid fill (no background-image — iOS
+   fails to paint bitmaps on large composited layers) with a teal leading edge.
+   Only transform animates; will-change keeps it on the compositor. */
 .u-shutter-bar {
   position: absolute;
   left: 0;
   opacity: 1;
   background-color: var(--shutter-fill);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 8 L8 0' stroke='%2381ADAA' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 8px 8px;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -232,7 +257,7 @@
   border-left: 1px solid rgba(129, 173, 170, 0.6);
 }
 
-/* Route-change shutter panel — fully opaque, same tiled hatch */
+/* Route-change shutter panel — flat opaque fill */
 .u-route-shutter {
   position: absolute;
   top: 0;
@@ -241,9 +266,6 @@
   width: 180vw;
   opacity: 1;
   background-color: var(--shutter-fill);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 8 L8 0' stroke='%2381ADAA' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 8px 8px;
   border-right: 1px solid rgba(129, 173, 170, 0.6);
   will-change: transform;
   backface-visibility: hidden;

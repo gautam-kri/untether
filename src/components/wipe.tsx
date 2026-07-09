@@ -17,16 +17,18 @@ export function ShutterBars({ dir, className }: { dir: number; className?: strin
   const name = dir === 1 ? 'u-shutter-ltr' : 'u-shutter-rtl';
   return (
     <div aria-hidden="true" className={`u-shutter-overlay ${className ?? ''}`}>
+      {/* Guarantees a fully-opaque cover during the swap, behind the bars. */}
+      <div className="u-shutter-cover" />
       {Array.from({ length: BAR_COUNT }, (_, i) => (
         <div
           key={i}
           className="u-shutter-bar"
           data-dir={dir}
           style={{
-            // % of the overlay (not dvh) with a 1px overlap above and below each
-            // neighbour, so sub-pixel rounding can never open a seam.
-            top: i === 0 ? 0 : `calc(${i * 20}% - 1px)`,
-            height: 'calc(20% + 2px)',
+            // % of the overlay (not dvh) with a 3px overlap above and below each
+            // neighbour, so sub-pixel rounding at high DPR can't open a seam.
+            top: i === 0 ? 0 : `calc(${i * 20}% - 3px)`,
+            height: 'calc(20% + 6px)',
             width: BAR_WIDTH,
             animation: `${name} var(--dur-shutter) var(--ease-shutter) ${i * SHUTTER_STAGGER}ms both`,
           }}
