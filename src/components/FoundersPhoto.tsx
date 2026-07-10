@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useReducedMotion } from '../lib/hooks';
 
 const VB_W = 1000;
-const VB_H = 770;
-const LINE_LEFT = 400; // where the name and its leader line meet (viewBox x)
+const VB_H = 611; // matches a 46%-wide centred image (1054:1400) in the stage
+const LINE_LEFT_X = 248; // where a left-side name meets its leader line
+const LINE_RIGHT_X = 752; // where a right-side name meets its leader line
 
 interface Person {
   id: string;
   name: string;
   overlay: string;
+  side: 'left' | 'right';
   edge: [number, number]; // start of the leader line, on the founder's red outline
   hotspot: { left: string; top: string; width: string; height: string };
 }
@@ -18,20 +20,22 @@ const PEOPLE: Person[] = [
     id: 'gautam',
     name: 'Gautam Krishna',
     overlay: '/founders-gautam.webp',
-    edge: [594, 82],
-    hotspot: { left: '12%', top: '0%', width: '46%', height: '64%' },
+    side: 'left',
+    edge: [408, 64],
+    hotspot: { left: '10%', top: '0%', width: '48%', height: '64%' },
   },
   {
     id: 'harish',
     name: 'Harish Senthilkumar',
     overlay: '/founders-harish.webp',
-    edge: [675, 339],
+    side: 'right',
+    edge: [592, 257],
     hotspot: { left: '44%', top: '38%', width: '56%', height: '62%' },
   },
 ];
 
-/** Team photo: hover reveals a founder in red with their name outside on the
- *  left; clicking a founder opens their full bio below (handled by onSelect). */
+/** Centred team photo: hover reveals a founder in red with their name to the
+ *  side; clicking opens their full bio below (handled by onSelect). */
 export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => void }) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState<string | null>(null);
@@ -39,9 +43,9 @@ export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => 
 
   return (
     <figure className="m-0">
-      <div className="relative mx-auto w-full max-w-[680px]">
-        {/* Image — full width on mobile, right-hand column on desktop */}
-        <div className="relative ml-auto w-full overflow-hidden rounded-sm border border-hairline min-[720px]:w-[58%]">
+      <div className="relative mx-auto w-full max-w-[900px]">
+        {/* Image — full width on mobile, centred column on desktop */}
+        <div className="relative mx-auto w-full overflow-hidden rounded-sm border border-hairline min-[720px]:w-[46%]">
           <img
             src="/founders.jpg"
             alt="Untether's two co-founders"
@@ -80,7 +84,7 @@ export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => 
           ))}
         </div>
 
-        {/* Leader lines from each red outline out to the left (desktop) */}
+        {/* Leader lines from each red outline out to the side (desktop) */}
         <svg
           className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible min-[720px]:block"
           viewBox={`0 0 ${VB_W} ${VB_H}`}
@@ -89,10 +93,11 @@ export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => 
         >
           {PEOPLE.map((p) => {
             const on = active === p.id;
+            const endX = p.side === 'left' ? LINE_LEFT_X : LINE_RIGHT_X;
             return (
               <g key={p.id} style={{ opacity: on ? 1 : 0, transition: 'opacity 150ms var(--ease-mech)' }}>
                 <polyline
-                  points={`${p.edge[0]},${p.edge[1]} ${LINE_LEFT},${p.edge[1]}`}
+                  points={`${p.edge[0]},${p.edge[1]} ${endX},${p.edge[1]}`}
                   fill="none"
                   stroke="var(--accent-red)"
                   strokeWidth={2}
@@ -110,19 +115,19 @@ export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => 
           })}
         </svg>
 
-        {/* Founder names, outside the image on the left (desktop) */}
+        {/* Founder names, outside the image to the side (desktop) */}
         {PEOPLE.map((p) => (
           <span
             key={p.id}
             aria-hidden="true"
             className="pointer-events-none absolute hidden font-base text-teal min-[720px]:block"
             style={{
-              left: 0,
-              width: `${(LINE_LEFT / VB_W) * 100}%`,
+              ...(p.side === 'left'
+                ? { left: 0, textAlign: 'right', paddingRight: '12px' }
+                : { left: '74%', textAlign: 'left', paddingLeft: '12px' }),
+              width: '26%',
               top: `${(p.edge[1] / VB_H) * 100}%`,
               transform: 'translateY(-50%)',
-              textAlign: 'right',
-              paddingRight: '12px',
               fontSize: '1rem',
               lineHeight: 1.2,
               opacity: active === p.id ? 1 : 0,

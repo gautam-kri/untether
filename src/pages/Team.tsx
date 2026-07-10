@@ -75,7 +75,7 @@ export default function Team() {
           style={{ scrollMarginTop: 'calc(var(--nav-total) + 16px)' }}
         >
           {sel ? (
-            <div className="mx-auto max-w-prose">
+            <div className="max-w-4xl">
               <button
                 type="button"
                 onClick={() => setSelected(null)}
@@ -96,7 +96,9 @@ export default function Team() {
               >
                 {sel.role}
               </p>
-              <p className="u-body u-body-teal mt-5">{sel.long}</p>
+              <p className="u-body u-body-teal mt-5" style={{ maxWidth: 'none' }}>
+                {sel.long}
+              </p>
             </div>
           ) : (
             <div className="grid gap-px sm:grid-cols-2">
