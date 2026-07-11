@@ -18,7 +18,7 @@ const TRIPTYCH = [
   {
     n: '03',
     title: 'OWN',
-    body: 'The models, the memory, and the machine are yours. Inspect any belief. Erase any trace. Unplug any time.',
+    body: "The models, the memory, and the machine are yours. Inspect any belief. Erase any trace. Unplug any time. Privacy isn't a policy — it's physics.",
   },
 ];
 
@@ -34,14 +34,15 @@ export default function AboutSection() {
             <SectionHeading>The assistant that finally remembers.</SectionHeading>
           </Reveal>
           <Reveal index={2} as="p" className="u-body mt-6">
-            Today's AI assistants are prompt-driven amnesiacs. They run on short-term context instead
-            of lived experience, can't tell a passing remark from a lasting insight, and pay for every
-            scrap of memory with your privacy.
+            Today's AI assistants are prompt-driven amnesiacs. The ones that finally remember your
+            life do it on someone else's servers — and in 2025 those servers changed hands: the
+            biggest independent memory companies were absorbed by the largest ad and commerce
+            businesses on earth.
           </Reveal>
           <Reveal index={3} as="p" className="u-body mt-4">
-            Untether is a two-part answer: sensor-pure glasses that perceive your day, and a personal
-            server in your home that turns raw observation into structured, evidence-backed memory.
-            Everything is processed locally. Nothing is streamed, mined, or sold.
+            Untether is the other path: sensor-pure glasses that perceive your day, and a server in
+            your home that turns raw observation into structured, evidence-backed memory. Everything
+            is processed locally. Nothing is streamed, mined, or sold.
           </Reveal>
         </div>
 

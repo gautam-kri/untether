@@ -9,7 +9,7 @@ const FEATURES: { glyph: GlyphName; title: string; body: string }[] = [
   {
     glyph: 'lock',
     title: 'LOCAL BY DEFAULT',
-    body: "Sight and sound are processed entirely on hardware you own. Nothing streams to a cloud you can't see.",
+    body: "Sight and sound are processed entirely on hardware you own. Nothing streams to a cloud you can't see. Away from home, your phone acts as an encrypted relay to your Vault — a dumb pipe that never sees your data.",
   },
   {
     glyph: 'doc-check',
@@ -19,7 +19,7 @@ const FEATURES: { glyph: GlyphName; title: string; body: string }[] = [
   {
     glyph: 'radio',
     title: 'ANSWERS BEFORE YOU ASK',
-    body: 'A living model of your life surfaces reminders, context, and insight in real time — unprompted.',
+    body: 'A living model of your life surfaces reminders, context, and insight — unprompted, and only to you.',
   },
   {
     glyph: 'swap',

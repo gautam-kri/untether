@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import RisingLetters from '../components/RisingLetters';
 import CircuitIllustration from '../illustrations/CircuitIllustration';
 import GlassesIllustration from '../illustrations/GlassesIllustration';
+import DemoVideo from '../components/DemoVideo';
 import { Reveal } from '../lib/reveal';
 import { landingNav } from '../lib/landingNav';
 
@@ -46,13 +47,20 @@ export default function HeroSection() {
             permission.
           </Reveal>
 
-          <Reveal index={4} className="mt-8 flex flex-wrap gap-4">
-            <Button to="/contact" variant="primary">
-              REQUEST AN INVITATION
+          <Reveal index={4} className="mt-8 flex flex-wrap items-center gap-4">
+            <Button to="/reserve" variant="primary">
+              RESERVE YOUR PLACE
             </Button>
             <Button variant="secondary" onClick={() => landingNav.goTo(2)}>
               EXPLORE THE HARDWARE
             </Button>
+          </Reveal>
+          <Reveal index={5} as="p" className="u-annotation mt-3">
+            ₹999 · FULLY REFUNDABLE
+          </Reveal>
+
+          <Reveal index={6} className="mt-7">
+            <DemoVideo />
           </Reveal>
         </div>
 

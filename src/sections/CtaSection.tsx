@@ -33,12 +33,13 @@ export default function CtaSection() {
         </Reveal>
         <Reveal index={3} as="p" className="u-body mx-auto mt-6 max-w-[40rem]">
           We are building the first run of Untether hardware with a small circle of founding users —
-          engineers, researchers, and the privacy-obsessed. Join the list and help decide what a
+          engineers, researchers, doctors, lawyers, and the privacy-obsessed. A ₹999 fully-refundable
+          reservation holds your place, gets you build-log access, and gives you a voice in what a
           privately owned mind should be.
         </Reveal>
         <Reveal index={4} className="mt-8 flex flex-wrap items-center justify-center gap-6">
-          <Button to="/contact" variant="primary">
-            REQUEST AN INVITATION
+          <Button to="/reserve" variant="primary">
+            RESERVE YOUR PLACE
           </Button>
           <Link
             to="/team"

@@ -1,18 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import ShutterEyeIllustration from '../illustrations/ShutterEyeIllustration';
 import { Reveal } from '../lib/reveal';
+import { FOUNDERS_EMAIL } from '../config';
 
 type Field = 'name' | 'email' | 'message';
 
-const ASIDE = [
-  { label: 'GENERAL', value: 'hello@untether.ai' },
+const ASIDE: { label: string; value: ReactNode }[] = [
+  { label: 'GENERAL', value: FOUNDERS_EMAIL },
   {
     label: 'EARLY ACCESS',
-    value: 'Request an invitation using the form and mention "first thousand".',
+    value: (
+      <>
+        Hold your place in The First Thousand for ₹999, fully refundable.{' '}
+        <Link
+          to="/reserve"
+          className="text-accent underline underline-offset-4"
+          data-cursor="link"
+        >
+          Reserve your place →
+        </Link>
+      </>
+    ),
   },
   { label: 'BASED IN', value: 'CHENNAI, INDIA · BUILT LOCALLY' },
 ];

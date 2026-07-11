@@ -384,21 +384,36 @@
   }
 }
 
-/* Navigation bar */
-.u-navbar {
+/* Reservation banner — thin strip pinned above the navbar */
+.u-banner {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 80;
+  height: calc(var(--banner-h) + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink-black);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Navigation bar — sits directly below the banner */
+.u-navbar {
+  position: fixed;
+  top: calc(var(--banner-h) + env(safe-area-inset-top, 0px));
+  left: 0;
+  right: 0;
   z-index: 70;
+  height: var(--nav-h);
+  box-sizing: border-box;
   background: rgba(6, 6, 6, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--hairline);
-  /* Extend up into the iOS status-bar safe area; content stays below it. */
-  height: var(--nav-total);
-  padding-top: env(safe-area-inset-top, 0px);
-  box-sizing: border-box;
 }
 /* Suspend the backdrop blur while any transition runs — Safari re-blurs the
    whole strip every frame as the bars sweep behind it, which competes with the

@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading';
 import FoundersPhoto from '../components/FoundersPhoto';
 import { useReducedMotion } from '../lib/hooks';
 import { Reveal } from '../lib/reveal';
+import { FOUNDER_LINKS } from '../config';
 
 interface Member {
   id: string;
@@ -12,26 +13,68 @@ interface Member {
   role: string;
   short: string;
   long: string;
+  github: string;
+  linkedin: string;
 }
 
 const TEAM: Member[] = [
   {
     id: 'gautam',
     name: 'GAUTAM KRISHNA',
-    role: 'CO-FOUNDER',
+    role: 'CO-FOUNDER · GROWTH & OPERATIONS',
     short:
-      "Gautam leads Untether's intelligence stack — the deterministic memory core, the reasoning pipeline, and the server architecture that keeps all of it at home.",
-    long: "Gautam leads Untether's intelligence stack — the deterministic memory core, the reasoning pipeline, and the whole server architecture that keeps every claim, relationship, and life episode inside your home instead of on someone else's machine. He is happiest in the load-bearing, unglamorous layers: how a memory is stored so it can be proven later, how a model can be swapped for a better one without losing a decade of context, and how a mind can reason about your life while never once asking the cloud for permission. He started Untether because he became convinced that keeping long-term intelligence in rented hands is a mistake we will all regret. Outside of that — and for reasons nobody has ever fully been able to explain — he likes geckos.",
+      'Gautam runs everything that is not the machine — strategy, operations, hiring, partnerships, and the design of the brand, the product experience, and this website.',
+    long: 'Gautam runs everything at Untether that is not the machine itself: company strategy, operations, hiring, early partnerships, and go-to-market, along with the design of the brand, the product experience, and this website. He turns a deep-tech roadmap into a company people can join, buy from, and trust, and keeps the reservation program, the founding community, and the day-to-day execution moving. He is also, for reasons nobody has ever fully been able to explain, fond of geckos.',
+    github: FOUNDER_LINKS.gautam.github,
+    linkedin: FOUNDER_LINKS.gautam.linkedin,
   },
   {
     id: 'harish',
     name: 'HARISH SENTHILKUMAR',
-    role: 'CO-FOUNDER',
+    role: 'CO-FOUNDER · INTELLIGENCE & ARCHITECTURE',
     short:
-      'Harish leads perception and product — the glasses, the sensor pipeline, and the experience of an assistant that already knows the context before you ask.',
-    long: "Harish leads perception and product — the glasses, the sensor pipeline, and the feeling of an assistant that already understands the context before you have finished asking. He obsesses over the details you are not supposed to notice: how a frame sits on your face, how sound is captured without a trace of noise, how an answer arrives on the lens at the exact moment it is useful and never a second too early. He believes the most personal technology ever built should quietly disappear into everyday life. He is also, it must be said, quite short — which is precisely why, in the photo above, he has stationed himself crouched down in front, so that nobody can work out just how much shorter he really is than Gautam. How insecure.",
+      'Harish leads the intelligence stack — the deterministic memory core, the reasoning pipeline, and the server architecture that keeps all of it running inside your home.',
+    long: "Harish leads Untether's intelligence stack — the deterministic memory core, the reasoning pipeline, the perception models, and the whole server architecture that keeps every claim, relationship, and life episode inside your home instead of on someone else's machine. He is happiest in the load-bearing, unglamorous layers: how a memory is stored so it can be proven later, how a model can be swapped for a better one without losing a decade of context, and how a mind can reason about your life while never once asking the cloud for permission. He built the first end-to-end version of the memory engine, and he is the reason the whole thing runs locally.",
+    github: FOUNDER_LINKS.harish.github,
+    linkedin: FOUNDER_LINKS.harish.linkedin,
   },
 ];
+
+function Social({ m }: { m: Member }) {
+  return (
+    <div className="mt-4 flex gap-5">
+      <a
+        href={m.github}
+        target="_blank"
+        rel="noreferrer"
+        className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+        data-cursor="link"
+      >
+        GITHUB ↗
+      </a>
+      <a
+        href={m.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+        data-cursor="link"
+      >
+        LINKEDIN ↗
+      </a>
+    </div>
+  );
+}
+
+function Role({ children }: { children: React.ReactNode }) {
+  return (
+    <p
+      className="u-annotation mt-2"
+      style={{ letterSpacing: '0.28em', color: 'var(--accent-red)', fontSize: '0.75rem', fontWeight: 700 }}
+    >
+      {children}
+    </p>
+  );
+}
 
 export default function Team() {
   const reduced = useReducedMotion();
@@ -64,8 +107,12 @@ export default function Team() {
           Untether is built by a small team that believes the most personal technology ever made
           should also be the most private.
         </Reveal>
+        <Reveal index={3} as="p" className="u-body mt-4">
+          We shipped the first end-to-end Untether memory engine as students, on a free API tier and
+          a 4GB laptop GPU.
+        </Reveal>
 
-        <Reveal index={3} className="mt-14">
+        <Reveal index={4} className="mt-14">
           <FoundersPhoto onSelect={handleSelect} />
         </Reveal>
 
@@ -85,46 +132,52 @@ export default function Team() {
                 ← BOTH FOUNDERS
               </button>
               <h2 className="u-display u-tile-title mt-6">{sel.name}</h2>
-              <p
-                className="u-annotation mt-2"
-                style={{
-                  letterSpacing: '0.35em',
-                  color: 'var(--accent-red)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                }}
-              >
-                {sel.role}
-              </p>
+              <Role>{sel.role}</Role>
               <p className="u-body u-body-teal mt-5" style={{ maxWidth: 'none' }}>
                 {sel.long}
               </p>
+              <Social m={sel} />
             </div>
           ) : (
             <div className="grid gap-px sm:grid-cols-2">
               {TEAM.map((m) => (
-                <button
+                <article
                   key={m.id}
-                  type="button"
-                  onClick={() => handleSelect(m.id)}
-                  className="flex flex-col items-start pt-6 text-left sm:px-8 sm:first:pl-0"
+                  className="flex flex-col items-start pt-6 sm:px-8 sm:first:pl-0"
                   style={{ borderTop: '1px solid var(--hairline)' }}
-                  data-cursor="link"
                 >
                   <h2 className="u-display u-tile-title">{m.name}</h2>
-                  <span
-                    className="u-annotation mt-2"
-                    style={{
-                      letterSpacing: '0.35em',
-                      color: 'var(--accent-red)',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                    }}
-                  >
-                    {m.role}
-                  </span>
-                  <span className="u-body u-body-teal mt-4">{m.short}</span>
-                </button>
+                  <Role>{m.role}</Role>
+                  <p className="u-body u-body-teal mt-4">{m.short}</p>
+                  <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+                    <button
+                      type="button"
+                      onClick={() => handleSelect(m.id)}
+                      className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+                      data-cursor="link"
+                    >
+                      READ FULL BIO →
+                    </button>
+                    <a
+                      href={m.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+                      data-cursor="link"
+                    >
+                      GITHUB ↗
+                    </a>
+                    <a
+                      href={m.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+                      data-cursor="link"
+                    >
+                      LINKEDIN ↗
+                    </a>
+                  </div>
+                </article>
               ))}
             </div>
           )}

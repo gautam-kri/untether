@@ -24,9 +24,10 @@ export default function ProductsSection() {
             chip="PERCEPTION · PROTOTYPE"
             title="APERTURE"
           >
-            Pure sensors, zero secrets. Camera, microphones, and location flow over an encrypted link
-            to your own server — no onboard recording, no cloud detour, and a lens display for the
-            answers.
+            Pure sensors, zero secrets. Camera, microphones, and motion flow over an encrypted link
+            to your own server — no long-term onboard storage, only an encrypted transit buffer wiped
+            on sync. A hard-wired capture light that physically cannot be bypassed, a physical
+            shutter, and answers spoken or on the lens.
           </ProductTile>
         </Reveal>
         <Reveal index={3} className="h-full">

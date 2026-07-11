@@ -29,7 +29,7 @@ export default function Footer() {
         </Link>
 
         <p className="u-annotation order-3 sm:order-none">
-          © 2026 UNTETHER. BUILT LOCALLY.
+          © 2026 UNTETHER · BUILT LOCALLY IN CHENNAI.
         </p>
 
         <nav className="flex w-full items-center justify-center gap-6 sm:w-auto" aria-label="Footer">

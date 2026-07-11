@@ -20,6 +20,7 @@
   --ease-shutter: cubic-bezier(0.45, 0, 0.55, 1);
 
   --nav-h: 96px;
-  /* Navbar height including the iOS status-bar safe area (0 elsewhere) */
-  --nav-total: calc(96px + env(safe-area-inset-top, 0px));
+  --banner-h: 34px;
+  /* Total top offset for content: reservation banner + navbar + iOS safe area */
+  --nav-total: calc(var(--banner-h) + 96px + env(safe-area-inset-top, 0px));
 }

@@ -7,14 +7,19 @@ import { SECTIONS } from '../lib/sections';
 import { ShutterBars, SWAP_AT, TRANSITION_LOCK } from './wipe';
 import { beginTransition, endTransition } from '../lib/transition';
 
-const SECTION_LINKS = [
-  { label: 'ABOUT', index: 1 },
-  { label: 'PRODUCTS', index: 2 },
-  { label: 'FEATURES', index: 3 },
-  { label: 'MISSION', index: 4 },
-];
-const ROUTE_LINKS = [
+interface NavItem {
+  label: string;
+  section?: number; // index into SECTIONS (landing wipe sections)
+  to?: string; // route
+}
+const NAV: NavItem[] = [
+  { label: 'ABOUT', section: 1 },
+  { label: 'PRODUCTS', section: 2 },
+  { label: 'FEATURES', section: 3 },
+  { label: 'TRUST', to: '/trust' },
+  { label: 'MISSION', section: 4 },
   { label: 'TEAM', to: '/team' },
+  { label: 'FAQ', to: '/faq' },
   { label: 'CONTACT', to: '/contact' },
 ];
 
@@ -123,10 +128,11 @@ export default function Navbar() {
     });
   const menuRoute = (to: string) => closeMenu(() => navigate(to));
 
-  const menuLinks = [
-    ...SECTION_LINKS.map((l) => ({ label: l.label, onClick: () => menuSection(l.index) })),
-    ...ROUTE_LINKS.map((l) => ({ label: l.label, onClick: () => menuRoute(l.to) })),
-  ];
+  const menuLinks = NAV.map((n) =>
+    n.section !== undefined
+      ? { label: n.label, onClick: () => menuSection(n.section as number) }
+      : { label: n.label, onClick: () => menuRoute(n.to as string) },
+  );
 
   return (
     <>
@@ -146,43 +152,49 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <nav className="hidden items-center gap-9 min-[900px]:flex" aria-label="Primary">
-            {SECTION_LINKS.map((l) => (
-              <button
-                key={l.label}
-                type="button"
-                onClick={() => goSection(l.index)}
-                className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
-                style={{ fontSize: '0.875rem' }}
-                aria-current={onLanding && landingIndex === l.index ? 'true' : undefined}
-              >
-                <span className="relative inline-block">
-                  {l.label}
-                  <Underline show={onLanding && landingIndex === l.index} />
-                </span>
-              </button>
-            ))}
-            {ROUTE_LINKS.map((l) => (
-              <Link
-                key={l.label}
-                to={l.to}
-                className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
-                style={{ fontSize: '0.875rem' }}
-                aria-current={location.pathname === l.to ? 'page' : undefined}
-              >
-                <span className="relative inline-block">
-                  {l.label}
-                  <Underline show={location.pathname === l.to} />
-                </span>
-              </Link>
-            ))}
+          <nav className="hidden items-center gap-6 min-[1024px]:flex" aria-label="Primary">
+            {NAV.map((n) => {
+              if (n.section !== undefined) {
+                const active = onLanding && landingIndex === n.section;
+                return (
+                  <button
+                    key={n.label}
+                    type="button"
+                    onClick={() => goSection(n.section as number)}
+                    className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+                    style={{ fontSize: '0.8125rem' }}
+                    aria-current={active ? 'true' : undefined}
+                  >
+                    <span className="relative inline-block">
+                      {n.label}
+                      <Underline show={active} />
+                    </span>
+                  </button>
+                );
+              }
+              const active = location.pathname === n.to;
+              return (
+                <Link
+                  key={n.label}
+                  to={n.to as string}
+                  className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+                  style={{ fontSize: '0.8125rem' }}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  <span className="relative inline-block">
+                    {n.label}
+                    <Underline show={active} />
+                  </span>
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile toggle */}
           <button
             type="button"
             onClick={() => (open ? closeMenu() : openMenu())}
-            className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent min-[900px]:hidden"
+            className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent min-[1024px]:hidden"
             style={{ fontSize: '0.875rem' }}
             aria-expanded={open}
             aria-controls="mobile-menu"
