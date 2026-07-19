@@ -13,11 +13,10 @@ interface NavItem {
   to?: string; // route
 }
 const NAV: NavItem[] = [
-  { label: 'ABOUT', section: 1 },
-  { label: 'PRODUCTS', section: 2 },
-  { label: 'FEATURES', section: 3 },
+  { label: 'MEMORY', to: '/memory' },
+  { label: 'PRODUCT', section: 1 },
   { label: 'TRUST', to: '/trust' },
-  { label: 'MISSION', section: 4 },
+  { label: 'TIERS', section: 3 },
   { label: 'TEAM', to: '/team' },
   { label: 'FAQ', to: '/faq' },
   { label: 'CONTACT', to: '/contact' },

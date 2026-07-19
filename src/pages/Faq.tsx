@@ -8,35 +8,39 @@ import { Reveal } from '../lib/reveal';
 const QA: [string, string][] = [
   [
     'Is it always recording?',
-    'No. Capture is event-gated, and the hard-wired light shows exactly when the sensors are live. If the light is off, nothing is being captured.',
+    'No. Capture is event-gated, and the hard-wired light shows exactly when the sensors are live. Raw audio and video are distilled into facts and destroyed within seconds — no recording archive is ever kept.',
+  ],
+  [
+    "How is this different from ChatGPT's memory?",
+    "Theirs is a context window on their servers — it blurs as it fills and lives on someone else's machine. Ours is an evidence-gated graph on your hardware: it gets sharper with history, and every memory shows its receipts.",
   ],
   [
     'What about the people around me?',
-    'Bystanders are blurred and discarded by default. Recognition is opt-in and enrollment-only, and pause zones let you switch recording off in the places you choose.',
+    'Consent mode keeps Aperture to your own voice by default, the people near you are not transcribed unless they opt in, and a spoken kill phrase drops capture instantly.',
   ],
   [
-    'Does it work away from home?',
-    'Yes. Your phone acts as an encrypted relay to your Vault at home — a dumb pipe that never sees your data.',
+    'Can you read my data?',
+    'No. Your keys live in an enclave you own — we hold none. We cannot read your memory for support, we cannot sell it, and we cannot be compelled to produce it, because we do not possess it.',
+  ],
+  [
+    'Does it work away from the box?',
+    'Yes. Your phone acts as an encrypted relay to your home node or Vault — a dumb pipe that never holds plaintext.',
   ],
   [
     'What does it cost?',
-    'The founding bundle is ₹1,99,000, or Sanctum hosted is ₹4,999/mo. A ₹999 reservation holds your place and is fully refundable.',
+    'Untether Cloud is $300/mo, Bridge is $400/mo with a home node, and Vault is a $3–5K appliance plus $500/mo. Commodity hardware, our software.',
   ],
   [
     'What happens if Untether shuts down?',
-    "Your Vault keeps working. It's yours, built on open foundations, with no cloud dependency to switch off.",
+    "Your Vault keeps working. It's built on open foundations with no cloud dependency to switch off — the memory is yours to keep running.",
   ],
   [
-    'What is the battery life?',
-    'Six to eight hours of mixed use, with a charging case to carry you through the rest of the day.',
+    'Is it autonomous?',
+    'It drafts, schedules, and chases things down — but every outbound action is a one-tap approval. It never sends on your behalf without you.',
   ],
   [
-    'When can I get one?',
-    'The first thousand units ship to reservation holders first, in order. Live timelines live on the build log.',
-  ],
-  [
-    'Can I see what it believes about me?',
-    'Every claim, with the evidence behind it — you have full access to the database that stores your memory.',
+    'Does it have a name?',
+    "No — you name yours. It's your chief of staff, not our mascot.",
   ],
 ];
 
@@ -71,9 +75,9 @@ export default function Faq() {
           ))}
         </div>
 
-        <Reveal index={11} className="mt-12">
-          <Button to="/reserve" variant="primary">
-            RESERVE YOUR PLACE
+        <Reveal index={12} className="mt-12">
+          <Button to="/partners" variant="primary">
+            BECOME A DESIGN PARTNER
           </Button>
         </Reveal>
       </div>

@@ -6,7 +6,8 @@ import Landing from './pages/Landing';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
 import Trust from './pages/Trust';
-import Reserve from './pages/Reserve';
+import Memory from './pages/Memory';
+import Partners from './pages/Partners';
 import Faq from './pages/Faq';
 
 export default function App() {
@@ -20,7 +21,8 @@ export default function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/trust" element={<Trust />} />
-        <Route path="/reserve" element={<Reserve />} />
+        <Route path="/memory" element={<Memory />} />
+        <Route path="/partners" element={<Partners />} />
         <Route path="/faq" element={<Faq />} />
       </Routes>
     </>

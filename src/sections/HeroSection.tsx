@@ -7,7 +7,6 @@ import CircuitIllustration from '../illustrations/CircuitIllustration';
 import GlassesIllustration from '../illustrations/GlassesIllustration';
 import DemoVideo from '../components/DemoVideo';
 import { Reveal } from '../lib/reveal';
-import { landingNav } from '../lib/landingNav';
 
 export default function HeroSection() {
   return (
@@ -33,30 +32,28 @@ export default function HeroSection() {
           </div>
 
           <Reveal index={1} className="mt-8">
-            <Kicker>PRIVATE · LOCAL · PERMANENT</Kicker>
+            <Kicker>PRIVATE · PROACTIVE · YOURS</Kicker>
           </Reveal>
 
           <Reveal index={2} as="h1" className="u-display u-section-heading mt-5">
-            Own your intelligence
+            The AI that actually remembers you
             <span style={{ color: 'var(--accent-red)' }}>.</span>
           </Reveal>
 
           <Reveal index={3} as="p" className="u-body mt-6">
-            A pair of glasses that see what you see. A server you own that remembers it. Untether
-            turns your days into structured, private, permanent memory — and never asks the cloud for
-            permission.
+            Untether is a private chief of staff that hears every commitment you make — email, Slack,
+            even the hallway — and drives it to done. It's built on a memory system that recalls your
+            life with evidence, not vibes, and it runs on hardware you own — so it can be trusted with
+            everything.
           </Reveal>
 
           <Reveal index={4} className="mt-8 flex flex-wrap items-center gap-4">
-            <Button to="/reserve" variant="primary">
-              RESERVE YOUR PLACE
+            <Button to="/partners" variant="primary">
+              BECOME A DESIGN PARTNER
             </Button>
-            <Button variant="secondary" onClick={() => landingNav.goTo(2)}>
-              EXPLORE THE HARDWARE
+            <Button to="/memory" variant="secondary">
+              SEE HOW THE MEMORY WORKS
             </Button>
-          </Reveal>
-          <Reveal index={5} as="p" className="u-annotation mt-3">
-            ₹999 · FULLY REFUNDABLE
           </Reveal>
 
           <Reveal index={6} className="mt-7">

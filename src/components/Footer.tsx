@@ -34,18 +34,18 @@ export default function Footer() {
 
         <nav className="flex w-full items-center justify-center gap-6 sm:w-auto" aria-label="Footer">
           <Link
-            to="/team"
+            to="/trust"
             className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
             data-cursor="link"
           >
-            TEAM
+            SECURITY WHITEPAPER
           </Link>
           <Link
-            to="/contact"
+            to="/memory"
             className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
             data-cursor="link"
           >
-            CONTACT
+            MEMORY SYSTEM
           </Link>
         </nav>
       </div>

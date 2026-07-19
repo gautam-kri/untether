@@ -6,23 +6,23 @@ import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import ShutterEyeIllustration from '../illustrations/ShutterEyeIllustration';
 import { Reveal } from '../lib/reveal';
-import { FOUNDERS_EMAIL } from '../config';
+import { CONTACT_EMAIL } from '../config';
 
 type Field = 'name' | 'email' | 'message';
 
 const ASIDE: { label: string; value: ReactNode }[] = [
-  { label: 'GENERAL', value: FOUNDERS_EMAIL },
+  { label: 'GENERAL', value: CONTACT_EMAIL },
   {
     label: 'EARLY ACCESS',
     value: (
       <>
-        Hold your place in The First Thousand for ₹999, fully refundable.{' '}
+        We're hand-installing with a cohort of ten design partners.{' '}
         <Link
-          to="/reserve"
+          to="/partners"
           className="text-accent underline underline-offset-4"
           data-cursor="link"
         >
-          Reserve your place →
+          Become a design partner →
         </Link>
       </>
     ),

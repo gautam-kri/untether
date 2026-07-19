@@ -108,8 +108,8 @@ export default function Team() {
           should also be the most private.
         </Reveal>
         <Reveal index={3} as="p" className="u-body mt-4">
-          We shipped the first end-to-end Untether memory engine as students, on a free API tier and
-          a 4GB laptop GPU.
+          We designed the Untether memory system by hand and shipped it as students — free API tier,
+          4GB laptop GPU.
         </Reveal>
 
         <Reveal index={4} className="mt-14">
