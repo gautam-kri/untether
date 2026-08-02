@@ -28,7 +28,7 @@ const QA: [string, string][] = [
   ],
   [
     'What does it cost?',
-    'Untether Cloud is $300/mo, Bridge is $400/mo with a home node, and Vault is a $3–5K appliance plus $500/mo. Commodity hardware, our software.',
+    'Untether Cloud is $300/mo, Bridge is $400/mo with a home node, and Vault is a $3–5K appliance. Commodity hardware, our software.',
   ],
   [
     'What happens if Untether shuts down?',
