@@ -78,6 +78,15 @@ export default function Trust() {
           yours — in hardware, in consent, in transit, and at rest.
         </Reveal>
 
+        <div className="mt-12 mx-auto max-w-[560px]">
+          <img
+            src="/images/aperture.webp"
+            alt="Untether Aperture — sensor-pure glasses"
+            className="u-media-blend"
+          />
+          <p className="u-annotation mt-3 text-center">APERTURE · THE CAPTURE LIGHT NEVER LIES</p>
+        </div>
+
         <div className="mt-14 flex flex-col">
           {SECTIONS.map((s, i) => (
             <Reveal

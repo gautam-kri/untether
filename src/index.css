@@ -130,6 +130,15 @@
     letter-spacing: 0.2em;
     color: var(--teal-text);
   }
+
+  /* Product/wireframe imagery sits on the near-black page: `lighten` drops the
+     image's own black ground so the subject floats seamlessly, no box edge. */
+  .u-media-blend {
+    mix-blend-mode: lighten;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 /* ------------------------------------------------------------------ */

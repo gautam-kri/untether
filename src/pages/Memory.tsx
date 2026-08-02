@@ -90,6 +90,18 @@ export default function Memory() {
           </div>
         </Section>
 
+        {/* The machine */}
+        <div className="mt-16">
+          <img
+            src="/images/vault-exploded.webp"
+            alt="Exploded view of the Untether Vault"
+            className="u-media-blend mx-auto max-w-[720px]"
+          />
+          <p className="u-annotation mt-4 text-center">
+            UNTETHER VAULT · THE MACHINE YOUR MEMORY RUNS ON
+          </p>
+        </div>
+
         {/* 5 — Patent-pending + trust */}
         <div className="mt-16 border-t border-hairline pt-8">
           <p className="u-annotation" style={{ lineHeight: 1.7 }}>

@@ -92,6 +92,11 @@ export default function Partners() {
           </div>
         </Reveal>
 
+        <div className="mt-12 mx-auto max-w-[520px]">
+          <img src="/images/vault.webp" alt="Untether Vault appliance" className="u-media-blend" />
+          <p className="u-annotation mt-3 text-center">UNTETHER VAULT · WE INSTALL IT IN YOUR HOME</p>
+        </div>
+
         <div className="mt-14 grid gap-12 min-[900px]:grid-cols-[55%_45%]">
           <div>
             {sent ? (

@@ -9,7 +9,7 @@ export default function MissionSection() {
   return (
     <div
       className="relative flex h-full w-full flex-col overflow-hidden"
-      style={{ paddingTop: 'var(--nav-total)' }}
+      style={{ paddingTop: 'calc(var(--nav-total) + 56px)' }}
     >
       <div
         className="pointer-events-none absolute inset-y-0 right-0 w-[70%] max-w-[720px]"

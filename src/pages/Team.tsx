@@ -44,9 +44,9 @@ function Social({ m }: { m: Member }) {
   return (
     <div className="mt-4 flex gap-5">
       <a
-        href={m.github}
-        target="_blank"
-        rel="noreferrer"
+        href="#"
+        onClick={(e) => e.preventDefault()}
+        aria-disabled="true"
         className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
         data-cursor="link"
       >
@@ -159,9 +159,9 @@ export default function Team() {
                       READ FULL BIO →
                     </button>
                     <a
-                      href={m.github}
-                      target="_blank"
-                      rel="noreferrer"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      aria-disabled="true"
                       className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
                       data-cursor="link"
                     >

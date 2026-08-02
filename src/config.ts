@@ -49,20 +49,20 @@ export const TIERS: Tier[] = [
   {
     name: 'UNTETHER VAULT',
     price: '$3–5K appliance',
-    sub: '+ $500/mo',
     badge: 'FLAGSHIP',
     body: 'A sealed appliance that runs perception, reasoning, and memory entirely in your home. Not one byte leaves.',
   },
 ];
 
 // Founder profile links (placeholders — replace with real URLs).
+// GitHub is intentionally inert for now (empty → rendered as a non-navigating link).
 export const FOUNDER_LINKS = {
   gautam: {
-    github: 'https://github.com/gautam-kri',
-    linkedin: 'https://www.linkedin.com/in/gautam-krishna',
+    github: '',
+    linkedin: 'https://www.linkedin.com/in/mr-gautam-krishna/',
   },
   harish: {
-    github: 'https://github.com/harish',
-    linkedin: 'https://www.linkedin.com/in/harish-senthilkumar',
+    github: '',
+    linkedin: 'https://www.linkedin.com/in/harish-senthilkumar/',
   },
 } as const;

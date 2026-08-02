@@ -4,7 +4,6 @@ import Button from '../components/Button';
 import Logo from '../components/Logo';
 import RisingLetters from '../components/RisingLetters';
 import CircuitIllustration from '../illustrations/CircuitIllustration';
-import GlassesIllustration from '../illustrations/GlassesIllustration';
 import DemoVideo from '../components/DemoVideo';
 import { Reveal } from '../lib/reveal';
 
@@ -63,7 +62,7 @@ export default function HeroSection() {
 
         <div className="hidden lg:block" aria-hidden="true">
           <div className="u-hero-float mx-auto w-full max-w-[520px]">
-            <GlassesIllustration />
+            <img src="/images/aperture-wireframe.webp" alt="" className="u-media-blend" />
           </div>
         </div>
       </div>
