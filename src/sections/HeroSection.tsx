@@ -61,8 +61,8 @@ export default function HeroSection() {
         </div>
 
         <div className="hidden lg:block" aria-hidden="true">
-          <div className="u-hero-float mx-auto w-full max-w-[520px]">
-            <img src="/images/aperture-wireframe.webp" alt="" className="u-media-blend" />
+          <div className="u-hero-float mx-auto w-full max-w-[320px]">
+            <img src="/images/aperture-hero.webp" alt="" className="block w-full" />
           </div>
         </div>
       </div>
