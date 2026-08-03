@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import { useReducedMotion } from '../lib/hooks';
 
-const VB_W = 1000;
-const VB_H = 611; // matches a 46%-wide centred image (1054:1400) in the stage
-const LINE_LEFT_X = 248; // where a left-side name meets its leader line
-const LINE_RIGHT_X = 752; // where a right-side name meets its leader line
-
 interface Person {
   id: string;
   name: string;
-  overlay: string;
-  side: 'left' | 'right';
-  edge: [number, number]; // start of the leader line, on the founder's red outline
+  mask: string;
+  sign: string;
+  /** Spotlight centre, as % of the image box. */
+  cx: number;
+  cy: number;
   hotspot: { left: string; top: string; width: string; height: string };
 }
 
@@ -19,23 +16,28 @@ const PEOPLE: Person[] = [
   {
     id: 'gautam',
     name: 'Gautam Krishna',
-    overlay: '/founders-gautam.webp',
-    side: 'left',
-    edge: [408, 64],
-    hotspot: { left: '10%', top: '0%', width: '48%', height: '64%' },
+    mask: '/founders-gautam.webp',
+    sign: '/founders-gautam-sign.webp',
+    cx: 33,
+    cy: 30,
+    hotspot: { left: '8%', top: '0%', width: '50%', height: '66%' },
   },
   {
     id: 'harish',
     name: 'Harish Senthilkumar',
-    overlay: '/founders-harish.webp',
-    side: 'right',
-    edge: [592, 257],
-    hotspot: { left: '44%', top: '38%', width: '56%', height: '62%' },
+    mask: '/founders-harish.webp',
+    sign: '/founders-harish-sign.webp',
+    cx: 66,
+    cy: 66,
+    hotspot: { left: '42%', top: '40%', width: '58%', height: '60%' },
   },
 ];
 
-/** Centred team photo: hover reveals a founder in red with their name to the
- *  side; clicking opens their full bio below (handled by onSelect). */
+/**
+ * Centred team photo. Hovering a founder opens a circular spotlight that reveals
+ * their marked-up "mask" (scribbles + outline) while their signature is drawn on
+ * left-to-right, as if being signed. Clicking opens their full bio (onSelect).
+ */
 export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => void }) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState<string | null>(null);
@@ -44,29 +46,51 @@ export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => 
   return (
     <figure className="m-0">
       <div className="relative mx-auto w-full max-w-[900px]">
-        {/* Image — full width on mobile, centred column on desktop */}
         <div className="relative mx-auto w-full overflow-hidden rounded-sm border border-hairline min-[720px]:w-[46%]">
           <img
-            src="/founders.jpg"
+            src="/founders.webp"
             alt="Untether's two co-founders"
-            width={1054}
-            height={1400}
+            width={1131}
+            height={1600}
             decoding="async"
             className="block h-auto w-full"
           />
-          {PEOPLE.map((p) => (
-            <img
-              key={p.id}
-              src={p.overlay}
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-              style={{
-                opacity: active === p.id ? 1 : 0,
-                transition: `opacity ${reduced ? 0 : 240}ms var(--ease-mech)`,
-              }}
-            />
-          ))}
+
+          {PEOPLE.map((p) => {
+            const on = active === p.id;
+            return (
+              <div key={p.id} className="pointer-events-none absolute inset-0" aria-hidden="true">
+                {/* Scribble mask — circular spotlight reveal */}
+                <img
+                  src={p.mask}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{
+                    clipPath: `circle(${on ? 150 : 0}% at ${p.cx}% ${p.cy}%)`,
+                    transition: reduced ? undefined : 'clip-path 650ms var(--ease-mech)',
+                    willChange: 'clip-path',
+                  }}
+                />
+                {/* Signature — drawn on left-to-right */}
+                <img
+                  src={p.sign}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{
+                    opacity: on ? 1 : 0,
+                    clipPath: on ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
+                    transition: reduced
+                      ? undefined
+                      : on
+                        ? 'clip-path 800ms var(--ease-mech) 200ms, opacity 180ms linear'
+                        : 'opacity 200ms linear, clip-path 0ms linear 220ms',
+                    willChange: 'clip-path',
+                  }}
+                />
+              </div>
+            );
+          })}
+
           {PEOPLE.map((p) => (
             <button
               key={p.id}
@@ -83,60 +107,6 @@ export default function FoundersPhoto({ onSelect }: { onSelect: (id: string) => 
             />
           ))}
         </div>
-
-        {/* Leader lines from each red outline out to the side (desktop) */}
-        <svg
-          className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible min-[720px]:block"
-          viewBox={`0 0 ${VB_W} ${VB_H}`}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          {PEOPLE.map((p) => {
-            const on = active === p.id;
-            const endX = p.side === 'left' ? LINE_LEFT_X : LINE_RIGHT_X;
-            return (
-              <g key={p.id} style={{ opacity: on ? 1 : 0, transition: 'opacity 150ms var(--ease-mech)' }}>
-                <polyline
-                  points={`${p.edge[0]},${p.edge[1]} ${endX},${p.edge[1]}`}
-                  fill="none"
-                  stroke="var(--accent-red)"
-                  strokeWidth={2}
-                  vectorEffect="non-scaling-stroke"
-                  pathLength={1}
-                  style={{
-                    strokeDasharray: 1,
-                    strokeDashoffset: on || reduced ? 0 : 1,
-                    transition: reduced ? undefined : 'stroke-dashoffset 320ms var(--ease-mech)',
-                  }}
-                />
-                <circle cx={p.edge[0]} cy={p.edge[1]} r={5} fill="var(--accent-red)" />
-              </g>
-            );
-          })}
-        </svg>
-
-        {/* Founder names, outside the image to the side (desktop) */}
-        {PEOPLE.map((p) => (
-          <span
-            key={p.id}
-            aria-hidden="true"
-            className="pointer-events-none absolute hidden font-base text-teal min-[720px]:block"
-            style={{
-              ...(p.side === 'left'
-                ? { left: 0, textAlign: 'right', paddingRight: '12px' }
-                : { left: '74%', textAlign: 'left', paddingLeft: '12px' }),
-              width: '26%',
-              top: `${(p.edge[1] / VB_H) * 100}%`,
-              transform: 'translateY(-50%)',
-              fontSize: '1rem',
-              lineHeight: 1.2,
-              opacity: active === p.id ? 1 : 0,
-              transition: 'opacity 200ms var(--ease-mech)',
-            }}
-          >
-            {p.name}
-          </span>
-        ))}
       </div>
 
       <figcaption className="u-annotation mt-4 text-center">
