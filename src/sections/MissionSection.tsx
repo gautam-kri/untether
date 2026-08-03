@@ -19,7 +19,7 @@ export default function MissionSection() {
         <MemoryGraphIllustration decorative />
       </div>
 
-      <FitScale className="relative min-h-0 flex-1" minScale={0.95}>
+      <FitScale className="relative min-h-0 flex-1 mb-12" minScale={0.8}>
         <div className="mx-auto max-w-[46rem] px-6 text-center md:px-10">
           <Reveal index={0} className="flex justify-center">
             <Kicker>THE MISSION</Kicker>

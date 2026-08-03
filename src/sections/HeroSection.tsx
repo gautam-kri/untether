@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import Logo from '../components/Logo';
 import RisingLetters from '../components/RisingLetters';
 import CircuitIllustration from '../illustrations/CircuitIllustration';
+import HeroGlasses from '../components/HeroGlasses';
 import DemoVideo from '../components/DemoVideo';
 import { Reveal } from '../lib/reveal';
 
@@ -12,11 +13,13 @@ export default function HeroSection() {
     <SectionShell
       bg={
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <CircuitIllustration opacity={0.25} />
+          <CircuitIllustration opacity={0.12} />
+          <HeroGlasses />
+          <div className="u-hero-scrim" />
         </div>
       }
     >
-      <div className="grid items-center gap-10 lg:grid-cols-[55%_45%]">
+      <div className="relative">
         <div className="max-w-[40rem]">
           <div className="u-hero-lockup flex items-center">
             <Logo className="u-hero-logo" animate title="Untether" />
@@ -58,12 +61,6 @@ export default function HeroSection() {
           <Reveal index={6} className="mt-7">
             <DemoVideo />
           </Reveal>
-        </div>
-
-        <div className="hidden lg:block" aria-hidden="true">
-          <div className="u-hero-float mx-auto w-full max-w-[320px]">
-            <img src="/images/aperture-hero.webp" alt="" className="block w-full" />
-          </div>
         </div>
       </div>
 
