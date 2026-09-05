@@ -1,3 +1,18 @@
+/**
+ * Standard scrolling page layout shell.
+ *
+ * Wraps content in a standard flex column that ensures the footer is
+ * pushed to the bottom of the viewport even if content is sparse.
+ * Applies the necessary top padding to clear the fixed navbar and banner.
+ * Used by all routes except the Landing page (which manages its own
+ * full-viewport wiping sections).
+ *
+ * Route-level entrance animations (the shutter wipe) are handled
+ * globally by `RouteWipeHost` in `App.tsx`, so this shell does not
+ * define any entrance transitions itself.
+ *
+ * @module PageShell
+ */
 import { type ReactNode } from 'react';
 import Footer from './Footer';
 

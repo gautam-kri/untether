@@ -1,3 +1,19 @@
+/**
+ * Primary site navigation.
+ *
+ * Renders a fixed header bar with:
+ * - The Untether logo/wordmark linking to home.
+ * - Desktop nav links (hidden below 1024px) that either navigate to a
+ *   landing section (via `landingNav.goTo`) or to a route (via React Router).
+ * - A mobile "MENU" / "CLOSE" toggle that plays a shutter wipe to reveal
+ *   a full-screen overlay with the same navigation items.
+ *
+ * Active-state underlines are shown for the current route or the current
+ * landing section. The navbar uses a blurred backdrop that is suspended
+ * during transitions (see `transition.ts`) to avoid iOS Safari frame drops.
+ *
+ * @module Navbar
+ */
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
@@ -13,8 +29,8 @@ interface NavItem {
   to?: string; // route
 }
 const NAV: NavItem[] = [
-  { label: 'MEMORY', to: '/memory' },
   { label: 'PRODUCT', section: 1 },
+  { label: 'MEMORY', section: 2 },
   { label: 'TRUST', to: '/trust' },
   { label: 'TIERS', section: 3 },
   { label: 'TEAM', to: '/team' },
@@ -133,6 +149,8 @@ export default function Navbar() {
       : { label: n.label, onClick: () => menuRoute(n.to as string) },
   );
 
+
+
   return (
     <>
       <header className="u-navbar">
@@ -140,12 +158,12 @@ export default function Navbar() {
           <Link
             to="/"
             onClick={goHome}
-            className="u-hit flex items-center gap-3 text-body"
+            className="u-brand-lockup u-nav-brand u-hit text-body"
             data-cursor="link"
             aria-label="Untether home"
           >
-            <Logo size={40} />
-            <span className="u-display" style={{ fontSize: '1.5rem' }}>
+            <Logo className="u-brand-logo" />
+            <span className="u-display u-brand-text">
               UNTETHER
             </span>
           </Link>
@@ -161,7 +179,7 @@ export default function Navbar() {
                     type="button"
                     onClick={() => goSection(n.section as number)}
                     className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
-                    style={{ fontSize: '0.8125rem' }}
+                    style={{ fontSize: '1rem', fontWeight: 500 }}
                     aria-current={active ? 'true' : undefined}
                   >
                     <span className="relative inline-block">
@@ -177,7 +195,7 @@ export default function Navbar() {
                   key={n.label}
                   to={n.to as string}
                   className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
-                  style={{ fontSize: '0.8125rem' }}
+                  style={{ fontSize: '1rem', fontWeight: 500 }}
                   aria-current={active ? 'page' : undefined}
                 >
                   <span className="relative inline-block">

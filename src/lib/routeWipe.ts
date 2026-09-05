@@ -1,8 +1,17 @@
 /**
- * Cover-first route transitions. A click on an internal link asks for a wipe;
- * the host (in App) sweeps the shutter bars in, swaps the route under full
- * cover at SWAP_AT, then sweeps the bars out to reveal the new page — so the
- * content never visibly changes before the bars arrive.
+ * Route-level wipe request channel (pub/sub).
+ *
+ * Decouples wipe-request _producers_ (the capture-phase click interceptor
+ * in `App.tsx`, or any imperative caller) from the wipe-request _consumer_
+ * (`RouteWipeHost` in `App.tsx`), which actually orchestrates the shutter
+ * bars and the React Router navigation.
+ *
+ * **Cover-first strategy:** the shutter bars sweep in over the CURRENT
+ * page first; the route is swapped only after the bars fully cover the
+ * screen (at `SWAP_AT` ms); then the bars sweep out to reveal the new
+ * page. This ensures the content swap is never visible to the user.
+ *
+ * @module routeWipe
  */
 export interface WipeRequest {
   to: string;

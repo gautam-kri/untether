@@ -1,3 +1,13 @@
+/**
+ * Trust & Security (Threat Model) page.
+ *
+ * A deep-dive into the privacy properties of the Untether system —
+ * hardware switches, consent logic, local processing, and open foundations.
+ * Built as a standard scrolling page (`PageShell`) with staggered reveal
+ * animations for the policy blocks.
+ *
+ * @module Trust
+ */
 import { useEffect } from 'react';
 import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';

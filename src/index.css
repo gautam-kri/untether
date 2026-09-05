@@ -15,6 +15,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'TT2020 StyleB';
   src: url('/fonts/TT2020StyleB-Italic.woff2') format('woff2');
@@ -22,6 +23,7 @@
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'TT2020 Base';
   src: url('/fonts/TT2020Base-Regular.woff2') format('woff2');
@@ -29,10 +31,30 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'TT2020 Base';
   src: url('/fonts/TT2020Base-Italic.woff2') format('woff2');
   font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* StyleB is aliased into the Base family at weight 500 so it can be reached
+   with `font-medium` / `fontWeight: 500` instead of a family swap. It is a
+   different typewriter cut, not a heavier one — the weight is just the handle. */
+@font-face {
+  font-family: 'TT2020 Base';
+  src: url('/fonts/TT2020StyleB-Regular.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT2020 Base';
+  src: url('/fonts/TT2020StyleB-Italic.woff2') format('woff2');
+  font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
@@ -98,25 +120,20 @@
     line-height: 1.02;
   }
 
-  .u-hero-wordmark {
-    font-size: clamp(2.5rem, 10.5vw, 9rem);
-    white-space: nowrap;
-  }
-
   .u-section-heading {
     font-size: clamp(2.25rem, 5vw, 4rem);
   }
 
   .u-tile-title {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
   }
 
   .u-body {
     font-family: 'TT2020 Base', ui-monospace, monospace;
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1.7;
     color: var(--body-white);
-    max-width: 62ch;
+    max-width: 100ch;
   }
 
   .u-body-teal {
@@ -150,16 +167,19 @@
   overflow: hidden;
   pointer-events: none;
 }
+
 .u-hero-glasses-box {
   --rx: 0%;
   position: absolute;
-  top: 50%;
-  right: -5%;
+  top: 65%;
+  /* Increased from 50% to move the glasses down */
+  right: -14%;
   width: 68%;
   max-width: 860px;
   aspect-ratio: 1 / 1;
   transform: translateY(-50%);
 }
+
 .u-hg-skin,
 .u-hg-wire {
   position: absolute;
@@ -168,32 +188,35 @@
   height: 100%;
   object-fit: contain;
 }
+
 /* Skin (product) shows to the RIGHT of the boundary; wireframe to the LEFT. */
 .u-hg-skin {
   clip-path: inset(0 0 0 var(--rx));
 }
+
 .u-hg-wire {
   clip-path: inset(0 calc(100% - var(--rx)) 0 0);
 }
+
 /* Left-side scrim so the headline stays legible over the visual. */
 .u-hero-scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    var(--ink-black) 0%,
-    var(--ink-black) 22%,
-    rgba(6, 6, 6, 0.55) 45%,
-    rgba(6, 6, 6, 0) 72%
-  );
+  background: linear-gradient(90deg,
+      var(--ink-black) 0%,
+      var(--ink-black) 22%,
+      rgba(6, 6, 6, 0.55) 45%,
+      rgba(6, 6, 6, 0) 72%);
 }
+
 @media (max-width: 1023px) {
   .u-hero-glasses-box {
     width: 116%;
     right: -22%;
     opacity: 0.32;
   }
+
   .u-hero-scrim {
     background: linear-gradient(90deg, var(--ink-black) 10%, rgba(6, 6, 6, 0.35) 100%);
   }
@@ -206,9 +229,11 @@
   0% {
     transform: scaleY(0);
   }
+
   50% {
     transform: scaleY(1);
   }
+
   100% {
     transform: scaleY(0);
   }
@@ -218,6 +243,7 @@
   0% {
     transform: translateY(-6px);
   }
+
   100% {
     transform: translateY(6px);
   }
@@ -228,6 +254,7 @@
   from {
     transform: translateY(110%);
   }
+
   to {
     transform: translateY(0);
   }
@@ -241,23 +268,28 @@
   from {
     transform: translate3d(-400vw, 0, 0);
   }
+
   to {
     transform: translate3d(100vw, 0, 0);
   }
 }
+
 @keyframes u-shutter-rtl {
   from {
     transform: translate3d(100vw, 0, 0);
   }
+
   to {
     transform: translate3d(-400vw, 0, 0);
   }
 }
+
 /* Route panel (180vw, single element, no stagger) */
 @keyframes u-route-ltr {
   from {
     transform: translate3d(-180vw, 0, 0);
   }
+
   to {
     transform: translate3d(100vw, 0, 0);
   }
@@ -287,19 +319,24 @@
   opacity: 0;
   animation: u-shutter-cover-fade var(--dur-shutter) linear both;
 }
+
 @keyframes u-shutter-cover-fade {
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   72% {
     opacity: 1;
   }
+
   84% {
     opacity: 0;
   }
+
   100% {
     opacity: 0;
   }
@@ -317,9 +354,11 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
 .u-shutter-bar[data-dir='1'] {
   border-right: 1px solid rgba(129, 173, 170, 0.6);
 }
+
 .u-shutter-bar[data-dir='-1'] {
   border-left: 1px solid rgba(129, 173, 170, 0.6);
 }
@@ -343,6 +382,7 @@
   from {
     transform: scaleX(0);
   }
+
   to {
     transform: scaleX(1);
   }
@@ -352,6 +392,7 @@
   from {
     stroke-dashoffset: 1;
   }
+
   to {
     stroke-dashoffset: 0;
   }
@@ -361,6 +402,7 @@
   from {
     fill-opacity: 0;
   }
+
   to {
     fill-opacity: 1;
   }
@@ -370,6 +412,7 @@
   from {
     transform: translateX(-8px);
   }
+
   to {
     transform: translateX(8px);
   }
@@ -390,12 +433,15 @@
   outline: none;
   transition: border-color var(--dur-ui) var(--ease-mech);
 }
+
 .u-field:focus {
   border-bottom-color: var(--accent-red);
 }
+
 .u-field.is-invalid {
   border-bottom-color: var(--accent-red);
 }
+
 /* Suppress native autofill styling */
 .u-field:-webkit-autofill,
 .u-field:-webkit-autofill:focus {
@@ -404,21 +450,49 @@
   box-shadow: 0 0 0 1000px transparent inset;
 }
 
-/* Hero wordmark: logo tracks the cap height of the wordmark and sits inline */
-.u-hero-lockup {
-  font-size: clamp(2.5rem, 10.5vw, 9rem);
-  gap: 0.16em;
+/* ------------------------------------------------------------------ */
+/* Brand Lockup (Logo + Wordmark)                                      */
+/* ------------------------------------------------------------------ */
+/* A unified component to keep the logo and text perfectly aligned at 
+   any scale. Control the size of both by overriding `--brand-size`. */
+.u-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--brand-size) * 0.25);
+  text-decoration: none;
 }
-.u-hero-logo {
+
+.u-brand-logo {
   flex: none;
-  width: 0.74em;
-  height: 0.74em;
+  width: var(--brand-size) !important;
+  height: var(--brand-size) !important;
+}
+
+.u-brand-text {
+  /* Text is scaled up so its cap-height perfectly matches the logo */
+  font-size: calc(var(--brand-size) * (70 / 60));
+  line-height: var(--brand-size);
+  /* Nudge down slightly to vertically center the cap-height */
+  transform: translateY(calc(var(--brand-size) * (4 / 60)));
+  white-space: nowrap;
+}
+
+/* Responsive scaling for the two instances */
+.u-nav-brand {
+  /* Navbar: 32px on small phones, 45px on desktop */
+  --brand-size: clamp(38px, 5vw, 45px);
+}
+
+.u-hero-brand {
+  /* Hero: large and dramatic */
+  --brand-size: clamp(4rem, 10vw, 8rem);
 }
 
 /* Hero motion */
 .u-hero-float {
   animation: u-float 6s ease-in-out infinite alternate;
 }
+
 .u-scroll-line {
   display: block;
   width: 1.5px;
@@ -427,7 +501,9 @@
   transform-origin: top center;
   animation: u-scroll-line 1.6s var(--ease-mech) infinite;
 }
+
 @media (prefers-reduced-motion: reduce) {
+
   .u-hero-float,
   .u-scroll-line {
     animation: none;
@@ -441,10 +517,12 @@
   background: transparent;
   transition: border-color var(--dur-ui) var(--ease-mech), transform var(--dur-ui) var(--ease-mech);
 }
+
 .u-tile:hover {
   border-color: var(--accent-red);
   transform: translateY(-4px);
 }
+
 @media (prefers-reduced-motion: reduce) {
   .u-tile:hover {
     transform: none;
@@ -471,7 +549,7 @@
 /* Navigation bar — sits directly below the banner */
 .u-navbar {
   position: fixed;
-  top: calc(var(--banner-h) + env(safe-area-inset-top, 0px));
+  top: env(safe-area-inset-top, 0px);
   left: 0;
   right: 0;
   z-index: 70;
@@ -482,6 +560,7 @@
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--hairline);
 }
+
 /* Suspend the backdrop blur while any transition runs — Safari re-blurs the
    whole strip every frame as the bars sweep behind it, which competes with the
    bar animation. Restored 100ms after the transition ends (see transition.ts). */
@@ -507,6 +586,7 @@
   transform: translateY(-50%);
   z-index: 45;
 }
+
 .u-prognav-btn {
   position: relative;
   display: block;
@@ -516,6 +596,7 @@
   border: 0;
   background: transparent;
 }
+
 .u-prognav-dot {
   display: block;
   width: 10px;
@@ -525,6 +606,7 @@
   box-sizing: border-box;
   transition: background 300ms var(--ease-mech);
 }
+
 .u-prognav-label {
   position: absolute;
   right: calc(100% + 12px);
@@ -535,15 +617,18 @@
   pointer-events: none;
   transition: opacity var(--dur-ui) var(--ease-mech), transform var(--dur-ui) var(--ease-mech);
 }
+
 .u-prognav-btn:hover .u-prognav-label,
 .u-prognav-btn:focus-visible .u-prognav-label {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
+
 .u-prognav-btn:focus-visible {
   outline: 2px solid var(--accent-red);
   outline-offset: 3px;
 }
+
 @media (max-width: 900px) {
   .u-prognav {
     display: none;
@@ -560,6 +645,7 @@
   transition: opacity var(--dur-ui) var(--ease-mech);
   will-change: transform;
 }
+
 .u-cursor-dot {
   position: absolute;
   width: 3px;
@@ -570,35 +656,41 @@
   background: var(--accent-red);
   transition: background var(--dur-ui) var(--ease-mech);
 }
+
 .u-cursor-tick {
   position: absolute;
   background: var(--line-white);
   transition: opacity var(--dur-ui) var(--ease-mech), transform var(--dur-ui) var(--ease-mech);
 }
+
 .u-tick-t {
   width: 1.5px;
   height: 6px;
   left: -0.75px;
   top: -10px;
 }
+
 .u-tick-b {
   width: 1.5px;
   height: 6px;
   left: -0.75px;
   top: 4px;
 }
+
 .u-tick-l {
   width: 6px;
   height: 1.5px;
   left: -10px;
   top: -0.75px;
 }
+
 .u-tick-r {
   width: 6px;
   height: 1.5px;
   left: 4px;
   top: -0.75px;
 }
+
 .u-cursor-br {
   position: absolute;
   width: 8px;
@@ -610,44 +702,54 @@
   transition: opacity var(--dur-ui) var(--ease-mech), left var(--dur-ui) var(--ease-mech),
     top var(--dur-ui) var(--ease-mech);
 }
+
 .u-br-tl {
   border-right: 0;
   border-bottom: 0;
 }
+
 .u-br-tr {
   border-left: 0;
   border-bottom: 0;
 }
+
 .u-br-br {
   border-left: 0;
   border-top: 0;
 }
+
 .u-br-bl {
   border-right: 0;
   border-top: 0;
 }
+
 .u-cursor[data-mode='active'] .u-cursor-dot {
   background: var(--line-white);
 }
+
 .u-cursor[data-mode='active'] .u-cursor-tick {
   opacity: 0;
   transform: rotate(45deg);
 }
+
 .u-cursor[data-mode='active'] .u-br-tl {
   opacity: 1;
   left: -14px;
   top: -14px;
 }
+
 .u-cursor[data-mode='active'] .u-br-tr {
   opacity: 1;
   left: 6px;
   top: -14px;
 }
+
 .u-cursor[data-mode='active'] .u-br-br {
   opacity: 1;
   left: 6px;
   top: 6px;
 }
+
 .u-cursor[data-mode='active'] .u-br-bl {
   opacity: 1;
   left: -14px;
@@ -657,12 +759,14 @@
 /* Cursor: hide native pointer only on fine-pointer devices with the
    custom cursor mounted. */
 @media (pointer: fine) {
+
   body.u-has-cursor,
   body.u-has-cursor a,
   body.u-has-cursor button,
   body.u-has-cursor [role='button'] {
     cursor: none;
   }
+
   body.u-has-cursor input,
   body.u-has-cursor textarea,
   body.u-has-cursor select {
@@ -674,4 +778,170 @@
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Transcript — an ordinary day, read as a log                         */
+/* ------------------------------------------------------------------ */
+/* Built entirely from type, rules and spacing: a fixed timestamp gutter,
+   a hairline between entries, and a hanging indent that keeps every
+   spoken line flush on the left. Deliberately not a messaging UI — no
+   avatars, no bubbles, no alternating alignment. */
+/* The gutter and the measure are declared once here and consumed by the
+   entry grid below, so the rules can never outrun the text: the list is
+   capped at exactly the width of its own two tracks. Without this the
+   `li` — which is both the grid container and the thing carrying the
+   hairline — stretches to the full content column and the rule trails
+   off past the last character. */
+/* These three values are the ONLY place transcript width is decided. The
+   entry grid consumes them and the list caps itself to their sum, so the
+   text, the track and the hairline all end at the same x. Never put a
+   max-width on the line itself — that reintroduces a second, silent cap
+   and the rule starts trailing off past the last character again. */
+.u-transcript {
+  --tr-gutter: 3rem;
+  --tr-gap: 1.5rem;
+  --tr-measure: 100ch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: calc(var(--tr-gutter) + var(--tr-gap) + var(--tr-measure));
+}
+
+.u-transcript-entry {
+  display: grid;
+  grid-template-columns: var(--tr-gutter) minmax(0, var(--tr-measure));
+  column-gap: var(--tr-gap);
+  padding: 1rem 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.u-transcript-entry:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+/* Tabular figures so the column of times stays a straight edge. Its
+   line-height is set in absolute units to match the first line's box,
+   which top-aligns the two columns without a magic offset. */
+.u-transcript-time {
+  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  font-size: 1rem;
+  line-height: 1.65rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-red);
+  white-space: nowrap;
+}
+
+/* No max-width here on purpose — the grid track above is the cap. */
+.u-transcript-line {
+  position: relative;
+  padding-left: 1.5rem;
+  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.u-transcript-line+.u-transcript-line {
+  margin-top: 0.35rem;
+}
+
+/* Speaker marks are decorative. They live only in CSS, and the `/ ''`
+   alt-text pairs them with an empty accessible name so the mark is kept
+   out of the accessibility tree entirely (CSS generated content is
+   otherwise announced by NVDA and VoiceOver). The real speaker is
+   carried by the visually-hidden label in the markup. */
+.u-transcript-line::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.u-transcript-line[data-kind='it'] {
+  color: var(--line-white);
+}
+
+.u-transcript-line[data-kind='it']::before {
+  content: '\25B8';
+  color: var(--accent-red);
+}
+
+.u-transcript-line[data-kind='you'] {
+  color: var(--body-white);
+}
+
+.u-transcript-line[data-kind='you']::before {
+  content: '\2014';
+  color: var(--blend-teal);
+}
+
+/* Where the alt-text syntax is supported, pair each mark with an empty
+   accessible name. Layered behind @supports because a browser that cannot
+   parse it would drop the whole declaration and lose the mark entirely. */
+@supports (content: 'x' / '') {
+  .u-transcript-line[data-kind='it']::before {
+    content: '\25B8' / '';
+  }
+
+  .u-transcript-line[data-kind='you']::before {
+    content: '\2014' / '';
+  }
+}
+
+.u-transcript-line[data-kind='stage'] {
+  color: var(--teal-text);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.u-transcript-line[data-kind='stage']::before {
+  content: '';
+  top: 0.8em;
+  width: 0.75rem;
+  height: 1px;
+  background: var(--blend-teal);
+}
+
+@media (max-width: 600px) {
+  .u-transcript-entry {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.5rem;
+  }
+
+  .u-transcript-time {
+    line-height: 1.4;
+  }
+}
+
+/* Entries are fully legible at rest; the animation is only ever added on
+   top, once, when the section is first revealed. Nothing waits at
+   opacity 0 for an observer that may never run. */
+@keyframes u-transcript-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.u-transcript[data-revealed='true'] .u-transcript-entry {
+  animation: u-transcript-in 420ms var(--ease-mech) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-transcript[data-revealed='true'] .u-transcript-entry {
+    animation: none;
+  }
+}
+
+/* The hinge between the fantasy above it and the argument below. */
+.u-pivot-line {
+  font-size: clamp(1.5rem, 3vw, 5rem);
 }

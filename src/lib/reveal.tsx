@@ -1,3 +1,25 @@
+/**
+ * Reveal coordination for illustration draw-on animations.
+ *
+ * Provides a dual-mode reveal system:
+ *
+ * 1. **Context-driven** (landing page) — `RevealProvider` wraps each
+ *    wipe section. Illustrations use `useReveal()` which reads the
+ *    context and triggers the draw-on when the section becomes active.
+ *
+ * 2. **Intersection-driven** (scrolling pages) — When no provider is
+ *    present (`ctx === null`), `useReveal()` falls back to an
+ *    `IntersectionObserver` and reveals the illustration when it
+ *    scrolls into view (15% threshold).
+ *
+ * Both modes latch — once revealed, an illustration never resets.
+ *
+ * The `Reveal` component is a thin layout wrapper retained for
+ * call-site compatibility; it no longer applies entrance animations
+ * (those are handled entirely by the shutter-bar system now).
+ *
+ * @module reveal
+ */
 import {
   createContext,
   useContext,

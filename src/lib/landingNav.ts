@@ -1,3 +1,21 @@
+/**
+ * Landing section navigation — external store.
+ *
+ * The `Navbar` and `ProgressNav` live outside the Landing route subtree,
+ * but they need to know which section is active and to be able to trigger
+ * wipe transitions. This module solves that with a tiny external store
+ * that works with React's `useSyncExternalStore`:
+ *
+ * - `landingNav.register()` / `.unregister()` — called by `WipeContainer`
+ *   on mount/unmount to provide the `goTo` and `jump` callbacks.
+ * - `landingNav.goTo(i)` — triggers an animated wipe to section `i`.
+ * - `landingNav.jump(i)` — instantly swaps to section `i` (no animation),
+ *   used by the mobile menu which plays its own shutter sweep.
+ * - `useLandingIndex()` / `useLandingMounted()` — React hooks for
+ *   consuming the store's active index and mount status.
+ *
+ * @module landingNav
+ */
 import { useSyncExternalStore } from 'react';
 
 /**

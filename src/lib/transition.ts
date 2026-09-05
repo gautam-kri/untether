@@ -1,7 +1,18 @@
 /**
- * Marks the document while a section / route / menu transition is running so the
- * navbar can drop its (expensive on iOS) backdrop blur for the duration. The blur
- * is restored 100ms after the last transition ends. Ref-counted for safety.
+ * Transition lock — ref-counted body class for animation coordination.
+ *
+ * Adds/removes the `.u-transition-active` class on `<body>` while any
+ * section, route, or menu shutter transition is running. This class is
+ * consumed by CSS to suspend the navbar's `backdrop-filter: blur()`,
+ * which is expensive on iOS Safari and causes frame drops when the
+ * shutter bars animate behind it.
+ *
+ * The active count is ref-counted so overlapping transitions (e.g. a
+ * route wipe fired while the menu close wipe is still animating) don't
+ * prematurely remove the class. The class is restored with a 100ms
+ * delay after the last transition ends to avoid a visible flash.
+ *
+ * @module transition
  */
 let active = 0;
 

@@ -1,3 +1,17 @@
+/**
+ * Layout shell for full-viewport landing page sections.
+ *
+ * Wraps section content in a `FitScale` auto-scaler so it fits within
+ * exactly one screen height, degrading gracefully to scroll on small
+ * devices if the content is too dense. Sets the necessary padding to
+ * clear the navbar and the bottom safe area.
+ *
+ * Also accepts an absolutely-positioned `bg` layer for decorative
+ * backgrounds (like the hero glasses or motiffs) that sit behind
+ * the scaling content layer.
+ *
+ * @module SectionShell
+ */
 import type { ReactNode } from 'react';
 import FitScale from './FitScale';
 

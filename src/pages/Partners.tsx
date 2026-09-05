@@ -1,3 +1,13 @@
+/**
+ * Design partner cohort application page.
+ *
+ * A specialized lead capture form for the first ten installation slots.
+ * Includes a visual progress bar (seat counter) driven by constants in
+ * `config.ts`. The form validates required fields but is currently a
+ * frontend stub (shows confirmation state but does not post to a backend).
+ *
+ * @module Partners
+ */
 import { useEffect, useState } from 'react';
 import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';

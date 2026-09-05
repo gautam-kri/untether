@@ -1,3 +1,24 @@
+/**
+ * Full-viewport section switcher for the landing page.
+ *
+ * Manages a stack of absolutely-positioned sections, showing only the
+ * active one. Navigation between sections is driven by:
+ * - **Mouse wheel** (with a 500ms debounce lock)
+ * - **Touch swipe** (50px minimum threshold)
+ * - **Keyboard** (Arrow Up/Down, Page Up/Down, Home, End)
+ * - **Hash change** (direct URL navigation)
+ * - **Imperative** (`landingNav.goTo()` / `.jump()`)
+ *
+ * Dense sections (e.g. product tiles on mobile) scroll internally via
+ * `FitScale`'s overflow; the wheel/swipe handler only advances to the
+ * next section once the user reaches the scroll edge.
+ *
+ * All sections are kept mounted for instant visibility toggling; only
+ * `visibility` and `z-index` change. The `RevealProvider` wrapping each
+ * section controls illustration draw-on timing.
+ *
+ * @module WipeContainer
+ */
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { RevealProvider } from '../lib/reveal';
 import { useReducedMotion } from '../lib/hooks';

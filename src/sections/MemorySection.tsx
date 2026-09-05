@@ -8,7 +8,7 @@ import { Reveal } from '../lib/reveal';
 export default function MemorySection() {
   return (
     <SectionShell>
-      <div className="max-w-[46rem]">
+      <div className="max-w-[40rem]">
         <Reveal index={0}>
           <Kicker>MEMORY WITH RECEIPTS</Kicker>
         </Reveal>

@@ -38,10 +38,10 @@ export default function Button(props: ButtonProps) {
   const cls = `${base} ${variants[variant]} ${className ?? ''}`;
   const style = {
     height: '44px',
-    padding: '0 22px',
-    fontSize: '0.6875rem',
-    letterSpacing: '0.2em',
-    fontWeight: 700,
+    padding: '15px',
+    fontSize: '0.9rem',
+    letterSpacing: '0.1em',
+    fontWeight: 500,
   } as const;
 
   if ('to' in props && props.to !== undefined) {

@@ -1,3 +1,18 @@
+/**
+ * Viewport-fit auto-scaler.
+ *
+ * Measures the available height of the outer container against the natural
+ * height of its content. If the content fits (or can be gently scaled down
+ * to at least `minScale`), it is CSS-transformed to fit the viewport so
+ * each wipe section occupies exactly one screen. If the content is too
+ * dense to scale readably (common on small mobile screens), the container
+ * falls back to `overflow-y: auto` and scrolls internally instead.
+ *
+ * Used by `SectionShell` to make landing sections viewport-height panels
+ * that degrade gracefully to scroll on small devices.
+ *
+ * @module FitScale
+ */
 import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
 /**

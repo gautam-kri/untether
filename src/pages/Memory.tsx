@@ -1,3 +1,13 @@
+/**
+ * Memory Engine deep-dive page.
+ *
+ * Explains the core differentiator of the product: evidence-gated graph
+ * memory vs. token-based context windows. Features the large
+ * `MemoryPipelineIllustration` (which draws on when revealed) and
+ * comparative grids highlighting the technical advantages.
+ *
+ * @module Memory
+ */
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageShell from '../components/PageShell';

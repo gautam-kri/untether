@@ -1,3 +1,16 @@
+/**
+ * Landing page — full-viewport wipe-through experience.
+ *
+ * Assembles the five landing sections (Hero, Product, Memory, Tiers,
+ * Mission) into a `WipeContainer` that presents them as full-screen
+ * panels navigated by wheel, swipe, keyboard, or the `ProgressNav`
+ * dot navigator on the right edge.
+ *
+ * This is the only page that uses the wipe container; all other routes
+ * are standard scrolling pages wrapped in `PageShell`.
+ *
+ * @module Landing
+ */
 import WipeContainer from '../components/WipeContainer';
 import ProgressNav from '../components/ProgressNav';
 import HeroSection from '../sections/HeroSection';

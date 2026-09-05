@@ -1,3 +1,16 @@
+/**
+ * Team/Founders page.
+ *
+ * Presents the two co-founders. The core interaction revolves around the
+ * `FoundersPhoto` component — a single wide shot where hovering a founder
+ * opens a circular mask revealing a marked-up version of their photo and
+ * drawing on their signature. Clicking scrolls down to reveal their full
+ * biography block.
+ *
+ * Built as a standard scrolling page using `PageShell`.
+ *
+ * @module Team
+ */
 import { useEffect, useRef, useState } from 'react';
 import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';

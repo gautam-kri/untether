@@ -1,3 +1,13 @@
+/**
+ * Responsive media-query React hooks.
+ *
+ * Provides SSR-safe, reactive hooks for detecting pointer type and
+ * motion preferences. Used throughout the site to conditionally enable
+ * the custom cursor (fine pointer only) and to disable animations when
+ * the user prefers reduced motion.
+ *
+ * @module hooks
+ */
 import { useEffect, useState } from 'react';
 
 /** Tracks a CSS media query, SSR-safe and reactive to changes. */

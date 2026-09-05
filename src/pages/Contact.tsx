@@ -1,3 +1,13 @@
+/**
+ * General contact page.
+ *
+ * Presents a standard contact form alongside support and early-access
+ * context. The form includes client-side validation for required fields
+ * but is currently a visual stub (logs to console/shows confirmation,
+ * does not post to a backend).
+ *
+ * @module Contact
+ */
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import PageShell from '../components/PageShell';

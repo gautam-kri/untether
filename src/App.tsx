@@ -1,3 +1,13 @@
+/**
+ * Root application layout.
+ *
+ * Renders the global chrome (custom cursor, banner, navbar) and all
+ * client-side routes. Route transitions are coordinated through
+ * `RouteWipeHost`, which intercepts internal `<a>` clicks and plays
+ * the shutter-bar wipe animation before the actual navigation occurs.
+ *
+ * @module App
+ */
 import { useEffect, useRef, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -85,11 +95,19 @@ function RouteWipeHost() {
   return sweep ? <ShutterBars key={sweep.key} dir={sweep.dir} className="z-[60]" /> : null;
 }
 
+/**
+ * Root component rendered by `main.tsx`.
+ *
+ * Composes the persistent global chrome (Cursor, Banner, Navbar) with
+ * the route outlet. `RouteWipeHost` is a sibling of `<Routes>` so it
+ * can intercept link clicks, play the cover-first shutter animation,
+ * then navigate under full cover.
+ */
 export default function App() {
   return (
     <>
       <Cursor />
-      <Banner />
+      {/*<Banner />*/}
       <Navbar />
       <RouteWipeHost />
       <Routes>

@@ -1,6 +1,13 @@
 /**
- * Site-wide config. Manually-edited values live here so copy and the
- * design-partner counter can be updated without touching components.
+ * Site-wide configuration constants.
+ *
+ * All manually-edited values (copy, pricing, seat counts, external URLs)
+ * live here so they can be updated in one place without touching
+ * individual components. Several values are still placeholders — see the
+ * TODO/placeholder comments for items that need wiring to a backend or
+ * replacing with live URLs before launch.
+ *
+ * @module config
  */
 
 // Design-partner cohort — seat counter.

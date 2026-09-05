@@ -1,3 +1,27 @@
+/**
+ * SVG illustration framework — base frame and drawable primitives.
+ *
+ * All hand-authored blueprint-style illustrations in the site use this
+ * module. It provides:
+ *
+ * - **`IllustrationFrame`** — an SVG wrapper that coordinates the
+ *   draw-on animation via `useReveal()`. Applies the `is-armed` /
+ *   `is-played` CSS classes that control `stroke-dashoffset` transitions
+ *   defined in `illustrations.css`.
+ *
+ * - **Drawable primitives** (`Path`, `Line`, `Circle`, `Rect`, etc.) —
+ *   thin wrappers around native SVG elements that automatically attach
+ *   the `u-illus-line` class and `data-draw` attribute for consistent
+ *   stroke styling and draw-on animation wiring.
+ *
+ * - **`Callout`** — a dot-leader-label annotation used to label parts
+ *   of an illustration (teal leader line, teal text).
+ *
+ * - **`Hatch`** — 45° parallel hatching clipped to a rectangular region,
+ *   used for "filled" areas in the blueprint style.
+ *
+ * @module Illustration
+ */
 import { useRef, type ReactNode, type SVGProps } from 'react';
 import { useReveal } from '../lib/reveal';
 import { useReducedMotion } from '../lib/hooks';

@@ -1,3 +1,23 @@
+/**
+ * Shutter-bar transition primitives.
+ *
+ * Exports the `ShutterBars` component and timing constants consumed by
+ * `WipeContainer` (section transitions), `RouteWipeHost` (route transitions),
+ * and `Navbar` (mobile menu open/close). All three callers use the same
+ * visual mechanic — five opaque bars sweeping across the viewport — but
+ * with independent mount cycles so they don't conflict.
+ *
+ * ### Timing breakdown (default direction = LTR)
+ *
+ * - `0ms`          — first bar starts its `780ms` sweep.
+ * - `35ms × i`     — each subsequent bar starts, staggered.
+ * - `~500ms`       — all bars fully cover the viewport (`SWAP_AT`).
+ *                    Content is swapped here (invisible to user).
+ * - `~920ms`       — last bar clears the viewport.
+ * - `950ms`        — `TRANSITION_LOCK` — transition is considered done.
+ *
+ * @module wipe
+ */
 export const BAR_COUNT = 5;
 export const BAR_WIDTH = '400vw';
 export const SHUTTER_STAGGER = 35;

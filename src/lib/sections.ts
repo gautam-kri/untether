@@ -1,3 +1,14 @@
+/**
+ * Landing-page section metadata.
+ *
+ * Defines the ordered list of sections that drive the wipe-through
+ * navigation on the landing page. Consumed by `WipeContainer` (for
+ * section rendering and hash management), `ProgressNav` (for the
+ * right-side dot navigator), and `Navbar` (for section-link navigation).
+ *
+ * @module sections
+ */
+
 /** Ordered landing sections — drives the wipe system, progress nav and hash. */
 export interface SectionMeta {
   id: string;

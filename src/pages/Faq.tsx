@@ -1,3 +1,12 @@
+/**
+ * Frequently Asked Questions page.
+ *
+ * A simple scrolling list of Q&A blocks, wrapped in `PageShell`.
+ * Each block is wrapped in a `Reveal` component so they fade in
+ * sequentially as they enter the viewport.
+ *
+ * @module Faq
+ */
 import { useEffect } from 'react';
 import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
