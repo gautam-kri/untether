@@ -77,7 +77,7 @@ export default function TrustSection() {
           yours — in hardware, in consent, in transit, and at rest.
         </Reveal>
 
-        <div className="mt-12 mx-auto max-w-[560px]">
+        <div className="mt-12 mx-auto max-w-[35rem]">
           <img
             src="/images/aperture.webp"
             alt="Untether Aperture — sensor-pure glasses"
@@ -91,7 +91,7 @@ export default function TrustSection() {
             <Reveal
               key={s.n}
               index={3 + i}
-              className="grid gap-3 py-8 min-[700px]:grid-cols-[180px_1fr]"
+              className="grid gap-3 py-8 min-[700px]:grid-cols-[11.25rem_1fr]"
               style={{ borderTop: '1px solid var(--hairline)' }}
             >
               <h2 className="u-display u-tile-title">
@@ -104,7 +104,7 @@ export default function TrustSection() {
           ))}
         </div>
 
-        <Reveal index={10} className="mt-3 flex flex-wrap items-center gap-6">
+        <Reveal index={10} className="my-6 flex flex-wrap items-center gap-6">
           <Button to="/partners" variant="primary">
             BECOME A DESIGN PARTNER
           </Button>
