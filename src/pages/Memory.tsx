@@ -19,7 +19,7 @@ import MemoryPipelineIllustration from '../illustrations/MemoryPipelineIllustrat
 import { Reveal } from '../lib/reveal';
 
 const FAILS: [string, string][] = [
-  ['DECAY WITH SCALE', 'Context windows blur as they fill. The longer your history, the more the model forgets — recall gets worse exactly where it should get better.'],
+  ['DECAY WITH SCALE', 'Context windows blur as they fill. The longer your history, the more the model forgets. Recall gets worse exactly when it should be getting better.'],
   ['SIMILARITY GUESSWORK', 'Retrieval fetches whatever looks nearest in vector space. "Close" is not "correct," and the wrong-but-similar chunk wins constantly.'],
   ['CONFABULATION', 'Asked to recall, a language model will happily invent a memory that was never said, stated with total confidence.'],
   ['NO PROVENANCE', 'A generated answer has no receipts. You cannot see why it believes something, or trust it enough to act.'],
@@ -46,7 +46,7 @@ export default function Memory() {
 
   return (
     <PageShell>
-      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:px-10">
+      <div className="mx-auto w-full max-w-6xl px-6 py-5 md:px-10">
         <Reveal index={0}>
           <Kicker>THE CORE</Kicker>
         </Reveal>
@@ -60,13 +60,13 @@ export default function Memory() {
 
         {/* 1 — Schematic */}
         <Reveal index={3} className="mt-14 w-full overflow-x-auto">
-          <div className="min-w-[760px]">
+          <div className="min-w-0 sm:min-w-[760px]">
             <MemoryPipelineIllustration />
           </div>
         </Reveal>
 
         {/* 2 — Why windows and RAG fail */}
-        <Section n="01" title="Why windows and RAG fail">
+        <Section n="01" title="Why windows and RAG fail" >
           <Grid items={FAILS} />
         </Section>
 
@@ -75,7 +75,7 @@ export default function Memory() {
           <Grid items={CHANGES} accent />
         </Section>
 
-        {/* 4 — Proven on ₹0 */}
+        {/* 4 — Proven on ₹0 
         <Section n="03" title="Proven on ₹0">
           <p className="u-body u-body-teal max-w-[46rem]">
             The first end-to-end memory engine was built and run by two students on a free API tier
@@ -99,7 +99,7 @@ export default function Memory() {
             <DemoVideo />
           </div>
         </Section>
-
+        */}
         {/* The machine */}
         <div className="mt-16">
           <img
@@ -107,23 +107,23 @@ export default function Memory() {
             alt="Exploded view of the Untether Vault"
             className="u-media-blend mx-auto max-w-[720px]"
           />
-          <p className="u-annotation mt-4 text-center">
+          <p className="u-annotation mt-4 text-center" style={{ fontSize: '0.9rem' }}>
             UNTETHER VAULT · THE MACHINE YOUR MEMORY RUNS ON
           </p>
         </div>
 
         {/* 5 — Patent-pending + trust */}
         <div className="mt-16 border-t border-hairline pt-8">
-          <p className="u-annotation" style={{ lineHeight: 1.7 }}>
+          <p className="u-annotation" style={{ lineHeight: 1.7, fontSize: '0.9rem' }}>
             The evidence-gating architecture is patent-pending.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-6">
             <Button to="/partners" variant="primary">
-              BECOME A DESIGN PARTNER
+              JOIN BETA TESTING
             </Button>
             <Link
               to="/trust"
-              className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+              className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent text-lg"
               data-cursor="link"
             >
               READ THE THREAT MODEL →
@@ -153,7 +153,7 @@ function Grid({ items, accent }: { items: [string, string][]; accent?: boolean }
         <div key={title} className="pt-5" style={{ borderTop: '1px solid var(--hairline)' }}>
           <p
             className="u-annotation"
-            style={{ fontWeight: 700, color: accent ? 'var(--accent-red)' : undefined }}
+            style={{ fontWeight: 500, fontSize: '1rem', color: accent ? 'var(--accent-red)' : undefined }}
           >
             {title}
           </p>

@@ -7,10 +7,10 @@ import { Reveal } from '../lib/reveal';
 
 export default function MemorySection() {
   return (
-    <SectionShell>
-      <div className="max-w-[40rem]">
+    <SectionShell fitMinScale={0.9}>
+      <div className="max-w-[90rem]">
         <Reveal index={0}>
-          <Kicker>MEMORY WITH RECEIPTS</Kicker>
+          <Kicker>Memory With Receipts</Kicker>
         </Reveal>
         <Reveal index={1} className="mt-5">
           <SectionHeading>Every memory, backed by evidence.</SectionHeading>
@@ -18,7 +18,7 @@ export default function MemorySection() {
       </div>
 
       <Reveal index={2} className="mt-10 w-full overflow-x-auto">
-        <div className="min-w-[720px]">
+        <div className="min-w-0 sm:min-w-[720px]">
           <MemoryPipelineIllustration />
         </div>
       </Reveal>
@@ -32,7 +32,7 @@ export default function MemorySection() {
         <Reveal index={4}>
           <Link
             to="/memory"
-            className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+            className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent text-lg"
             data-cursor="link"
           >
             GO DEEPER →

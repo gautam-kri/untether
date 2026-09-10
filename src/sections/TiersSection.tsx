@@ -39,8 +39,8 @@ export default function TiersSection() {
         ))}
       </div>
 
-      <Reveal index={5} as="p" className="u-annotation mt-8" style={{ lineHeight: 1.7 }}>
-        Commodity hardware, our software. Yours to unplug.
+      <Reveal index={5} as="p" className="u-annotation mt-8" style={{ lineHeight: 1.7, fontWeight: 400, fontSize: '1rem' }}>
+        Ownership at every level.
       </Reveal>
     </SectionShell>
   );

@@ -42,21 +42,20 @@ export interface Tier {
 export const TIERS: Tier[] = [
   {
     name: 'UNTETHER CLOUD',
-    price: '$300/mo',
-    badge: 'START HERE',
+    price: 'COMING SOON',
+    badge: 'YOUR PRIVACY, OUR PRIORITY',
     body: 'The full chief of staff, hosted on dedicated infrastructure keyed to you. The fastest way in — no hardware to rack.',
   },
   {
     name: 'UNTETHER BRIDGE',
-    price: '$400/mo',
-    sub: '+ home node',
-    badge: 'YOUR DATA, HOME',
-    body: 'A home node holds your memory and keys; compute bursts to your dedicated cloud only when it must. Your history stays under your roof.',
+    price: 'COMING SOON',
+    badge: 'YOUR DATA, YOUR RULES. WE JUST RUN COMPUTE',
+    body: 'A home node holds your memory and keys. We run your inference, layered with end-to-end encryption, and complete privacy. Your history stays under your roof.',
   },
   {
     name: 'UNTETHER VAULT',
-    price: '$3–5K appliance',
-    badge: 'FLAGSHIP',
+    price: '$4,999 - ORDER NOW',
+    badge: 'THE FLAGSHIP PRODUCT. YOUR DATA, YOUR HARDWARE, YOUR COMPUTE.',
     body: 'A sealed appliance that runs perception, reasoning, and memory entirely in your home. Not one byte leaves.',
   },
 ];

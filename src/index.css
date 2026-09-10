@@ -67,7 +67,18 @@
     box-sizing: border-box;
   }
 
+  /* Fluid root — the single lever the whole design scales from.
+     Practically every measure in this system is expressed in `rem` or
+     `ch`, so moving the root moves type, spacing, gutters, measures and
+     the `max-w-*` containers together, in proportion.
+
+     It is flat 16px up to a 1280px viewport, so nothing at or below
+     laptop width changes at all; from there it ramps to 22px at 2560px.
+     Without this the design froze at 1280px — every clamp ceiling is
+     reached there — while viewport-relative art (the hero glasses at
+     `width: 68%`) kept growing, so the two drifted apart on big screens. */
   html {
+    font-size: clamp(16px, 10px + 0.46875vw, 22px);
     scroll-behavior: smooth;
     background-color: var(--ink-black);
     overflow-x: hidden;
@@ -173,9 +184,9 @@
   position: absolute;
   top: 65%;
   /* Increased from 50% to move the glasses down */
-  right: -14%;
+  right: -20%;
   width: 68%;
-  max-width: 860px;
+  max-width: 7200px;
   aspect-ratio: 1 / 1;
   transform: translateY(-50%);
 }
@@ -479,8 +490,10 @@
 
 /* Responsive scaling for the two instances */
 .u-nav-brand {
-  /* Navbar: 32px on small phones, 45px on desktop */
-  --brand-size: clamp(38px, 5vw, 45px);
+  /* Navbar: 38px on small phones, 45px at the 16px base — in rem so the
+     lockup rides the fluid root instead of staying 45px on a 2560px screen.
+     Its 5vw term already tops out at a 900px viewport. */
+  --brand-size: clamp(2.375rem, 5vw, 2.8125rem);
 }
 
 .u-hero-brand {

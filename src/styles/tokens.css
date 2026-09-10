@@ -19,8 +19,11 @@
   --dur-route: 600ms;
   --ease-shutter: cubic-bezier(0.45, 0, 0.55, 1);
 
-  --nav-h: 96px;
-  --banner-h: 34px;
+  /* In rem, not px, so the chrome scales with the fluid root (see the
+     `html` rule in index.css) instead of staying laptop-sized on a large
+     display. Identical to the old 96px / 34px at the 16px base. */
+  --nav-h: 6rem;
+  --banner-h: 2.125rem;
   /* Total top offset for content: reservation banner + navbar + iOS safe area */
-  --nav-total: calc(var(--banner-h) + 96px + env(safe-area-inset-top, 0px));
+  --nav-total: calc(var(--banner-h) + var(--nav-h) + env(safe-area-inset-top, 0px));
 }

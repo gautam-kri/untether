@@ -19,11 +19,13 @@ import MemorySection from '../sections/MemorySection';
 import TiersSection from '../sections/TiersSection';
 import MissionSection from '../sections/MissionSection';
 import { SECTIONS } from '../lib/sections';
+import TrustSection from '../sections/TrustSection';
 
 const CONTENT = [
   <HeroSection key="hero" />,
   <TwoWallsSection key="two-walls" />,
   <MemorySection key="memory-receipts" />,
+  <TrustSection key="trust" />,
   <TiersSection key="tiers" />,
   <MissionSection key="mission" />,
 ];

@@ -1,12 +1,10 @@
-/**
+/*
  * Trust & Security (Threat Model) page.
  *
  * A deep-dive into the privacy properties of the Untether system —
  * hardware switches, consent logic, local processing, and open foundations.
  * Built as a standard scrolling page (`PageShell`) with staggered reveal
  * animations for the policy blocks.
- *
- * @module Trust
  */
 import { useEffect } from 'react';
 import PageShell from '../components/PageShell';
@@ -15,6 +13,7 @@ import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import { Reveal } from '../lib/reveal';
 import { GITHUB_URL, WHITEPAPER_PDF_URL } from '../config';
+import SectionShell from '../components/SectionShell';
 
 interface Section {
   n: string;
@@ -26,25 +25,20 @@ const SECTIONS: Section[] = [
   {
     n: '01',
     title: 'HARDWARE HONESTY',
-    body: 'The capture light is wired to the sensor power rail, not to software: if the light is off, the sensors are off — not a setting. A physical shutter covers the camera, the mic switch cuts power rather than code, and a spoken kill phrase drops capture instantly.',
+    body: 'The hardware is yours. Pry open Aperture, or the Vault, and trace the wiring, check the firmware, and monitor the data. We designed every layer to be inspectable, and show the trail of data flow.',
   },
   {
     n: '02',
-    title: 'CONSENT BY DESIGN',
-    body: 'Consent mode keeps Aperture to your own voice by default — the people around you are not transcribed unless they opt in. It ships ready for two-party-consent jurisdictions, so the device follows the stricter rule wherever you are.',
+    title: 'DISTILL, THEN DESTROY',
+    body: 'Raw audio and video are turned into observations, and then destroyed within seconds. No recording archive is ever created. There is no library of your day sitting on a disk to leak, steal, or regret. Only the structured memory remains.',
   },
   {
     n: '03',
-    title: 'DISTILL, THEN DESTROY',
-    body: 'Raw audio and video are turned into facts and then destroyed within seconds. No recording archive is ever created — there is no library of your day sitting on a disk to leak, subpoena, or regret. Only the structured memory remains.',
+    title: 'KEYS & ZERO KNOWLEDGE',
+    body: 'Keys are generated and held in a hardware enclave you own. Remote access is WireGuard-only with zero open inbound ports, and everything is full-disk encrypted at rest. We hold no keys and we couldn\'t leak your memory if we tried.',
   },
   {
     n: '04',
-    title: 'KEYS & ZERO KNOWLEDGE',
-    body: 'Keys are generated and held in a hardware enclave you own. Remote access is WireGuard-only with zero open inbound ports, and everything is full-disk encrypted at rest. We hold no keys — we could not leak your memory if we were breached, because we cannot read it.',
-  },
-  {
-    n: '05',
     title: 'OPEN FOUNDATIONS',
     body: (
       <>
@@ -58,25 +52,20 @@ const SECTIONS: Section[] = [
         >
           Read the code on GitHub
         </a>
-        . Open foundations mean your Vault keeps working even if we do not.
+        . Open foundations mean your Vault keeps working even if we do not, and you can see how the system works.
       </>
     ),
   },
-  {
-    n: '06',
-    title: "WHAT WE CAN'T PROTECT YOU FROM",
-    body: 'Physical theft of your Vault — mitigated by full-disk encryption. A fully compromised phone — the relay never holds plaintext, so it stays a dumb pipe. And the duty of wearing a microphone in the world: that is on you, which is why the light never lies.',
-  },
 ];
 
-export default function Trust() {
+export default function TrustSection() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <PageShell>
-      <div className="mx-auto w-full max-w-5xl px-6 py-20 md:px-10">
+    <SectionShell fitMinScale={0.9}>
+      <div className="max-w-[90rem]">
         <Reveal index={0}>
           <Kicker>SECURITY & THREAT MODEL</Kicker>
         </Reveal>
@@ -94,7 +83,7 @@ export default function Trust() {
             alt="Untether Aperture — sensor-pure glasses"
             className="u-media-blend"
           />
-          <p className="u-annotation mt-3 text-center">APERTURE · THE CAPTURE LIGHT NEVER LIES</p>
+          <p className="u-annotation mt-3 text-center text-sm">APERTURE · THE CAMERA THAT NEVER RECORDS</p>
         </div>
 
         <div className="mt-14 flex flex-col">
@@ -115,11 +104,11 @@ export default function Trust() {
           ))}
         </div>
 
-        <Reveal index={10} className="mt-12 flex flex-wrap items-center gap-6">
+        <Reveal index={10} className="mt-3 flex flex-wrap items-center gap-6">
           <Button to="/partners" variant="primary">
             BECOME A DESIGN PARTNER
           </Button>
-          <a
+          {/*<a
             href={WHITEPAPER_PDF_URL}
             target="_blank"
             rel="noreferrer"
@@ -127,9 +116,9 @@ export default function Trust() {
             data-cursor="link"
           >
             READ THE SECURITY WHITEPAPER (PDF) →
-          </a>
+          </a>*/}
         </Reveal>
       </div>
-    </PageShell>
+    </SectionShell>
   );
 }

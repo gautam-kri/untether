@@ -31,8 +31,9 @@ interface NavItem {
 const NAV: NavItem[] = [
   { label: 'PRODUCT', section: 1 },
   { label: 'MEMORY', section: 2 },
-  { label: 'TRUST', to: '/trust' },
-  { label: 'TIERS', section: 3 },
+  { label: 'TRUST', section: 3 },
+  { label: 'TIERS', section: 4 },
+  { label: 'MISSION', section: 5 },
   { label: 'TEAM', to: '/team' },
   { label: 'FAQ', to: '/faq' },
   { label: 'CONTACT', to: '/contact' },
@@ -225,7 +226,7 @@ export default function Navbar() {
       {panel && (
         <div
           id="mobile-menu"
-          className="fixed inset-0 z-[55] flex flex-col items-center justify-center gap-6 bg-ink"
+          className="fixed inset-0 z-[55] flex flex-col items-center justify-center gap-6 bg-ink mt-20"
         >
           {menuLinks.map((l) => (
             <button
