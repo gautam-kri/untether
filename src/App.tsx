@@ -11,12 +11,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Banner from './components/Banner';
+// import Banner from './components/Banner'; // paired with the commented <Banner /> below
 import Cursor from './components/Cursor';
 import Landing from './pages/Landing';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
-import Trust from './sections/TrustSection';
 import Memory from './pages/Memory';
 import Partners from './pages/Partners';
 import Faq from './pages/Faq';

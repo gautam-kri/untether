@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom';
-import Logo from './Logo';
-import { landingNav } from '../lib/landingNav';
 
 /** Footer strip: brand mark, copyright line, and route links over a hairline. */
 export default function Footer() {
-  const goHome = (e: React.MouseEvent) => {
-    if (landingNav.isMounted()) {
-      e.preventDefault();
-      landingNav.goTo(0);
-    }
-  };
   return (
     <footer
       className="border-t border-hairline w-full"

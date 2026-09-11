@@ -5,7 +5,7 @@ import Logo from '../components/Logo';
 import RisingLetters from '../components/RisingLetters';
 import CircuitIllustration from '../illustrations/CircuitIllustration';
 import HeroGlasses from '../components/HeroGlasses';
-import DemoVideo from '../components/DemoVideo';
+// import DemoVideo from '../components/DemoVideo'; // paired with the commented <DemoVideo /> below
 import { Reveal } from '../lib/reveal';
 
 export default function HeroSection() {

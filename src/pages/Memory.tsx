@@ -14,7 +14,7 @@ import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
-import DemoVideo from '../components/DemoVideo';
+// import DemoVideo from '../components/DemoVideo'; // paired with the commented section below
 import MemoryPipelineIllustration from '../illustrations/MemoryPipelineIllustration';
 import { Reveal } from '../lib/reveal';
 
@@ -32,12 +32,13 @@ const CHANGES: [string, string][] = [
   ['MODEL-AGNOSTIC', 'Models are plug-ins. Swap in better perception or reasoning as it arrives without losing a day of memory.'],
 ];
 
-const STATS: [string, string][] = [
-  ['96', 'RAW CHUNKS INGESTED'],
-  ['29', 'EVIDENCE-GATED CLAIMS'],
-  ['230', 'LINKED RECEIPTS'],
-  ['0', 'MANUAL TAGS'],
-];
+// Paired with the commented-out "Proven on Rs 0" section below.
+// const STATS: [string, string][] = [
+//   ['96', 'RAW CHUNKS INGESTED'],
+//   ['29', 'EVIDENCE-GATED CLAIMS'],
+//   ['230', 'LINKED RECEIPTS'],
+//   ['0', 'MANUAL TAGS'],
+// ];
 
 export default function Memory() {
   useEffect(() => {
@@ -122,7 +123,7 @@ export default function Memory() {
               JOIN BETA TESTING
             </Button>
             <Link
-              to="/trust"
+              to="/#trust"
               className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent text-lg"
               data-cursor="link"
             >

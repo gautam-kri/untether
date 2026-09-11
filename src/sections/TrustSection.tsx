@@ -7,12 +7,12 @@
  * animations for the policy blocks.
  */
 import { useEffect } from 'react';
-import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import { Reveal } from '../lib/reveal';
-import { GITHUB_URL, WHITEPAPER_PDF_URL } from '../config';
+import { GITHUB_URL } from '../config';
+// WHITEPAPER_PDF_URL is paired with the commented whitepaper link below.
 import SectionShell from '../components/SectionShell';
 
 interface Section {
