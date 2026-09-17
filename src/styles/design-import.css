@@ -1,0 +1,596 @@
+/* ------------------------------------------------------------------ */
+/* Design import — Untether Site.dc.html                              */
+/* ------------------------------------------------------------------ */
+/* Everything here is ported from the saved design canvas: the hero frame
+   and glitch, the section watermark numeral, the transcript log panel,
+   the memory stage cards, the tier cards, the mission reticle and the
+   Trust eye sequence. Motion is one-shot or slow, and is fully disabled
+   under prefers-reduced-motion at the bottom of this file. */
+
+/* --- Headline corner frame + periodic RGB-split glitch (hero) -------- */
+.u-frame {
+  position: relative;
+  padding: 1.75rem 2.75rem;
+}
+
+.u-corner {
+  position: absolute;
+  width: 1.375rem;
+  height: 1.375rem;
+  border: 0 solid var(--accent-red);
+}
+
+.u-corner[data-pos='tl'] {
+  top: 0;
+  left: 0;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.u-corner[data-pos='tr'] {
+  top: 0;
+  right: 0;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.u-corner[data-pos='bl'] {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.u-corner[data-pos='br'] {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* --- Section watermark numeral (stroked, no fill) -------------------- */
+.u-watermark {
+  position: absolute;
+  top: -0.06em;
+  right: 2.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(11.25rem, 26vw, 22.5rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(129, 173, 170, 0.14);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Transcript log panel (product) --------------------------------- */
+.u-log {
+  border: 1px solid rgba(129, 173, 170, 0.3);
+  border-radius: 2px;
+  background: rgba(16, 19, 18, 0.5);
+}
+
+.u-log-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba(129, 173, 170, 0.3);
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+}
+
+.u-log-title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--teal-text);
+}
+
+.u-log-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent-red);
+  animation: u-blink 1.4s step-end infinite;
+}
+
+.u-log-meta {
+  display: flex;
+  gap: 0.875rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--blend-teal);
+}
+
+.u-log-meta .is-live {
+  color: var(--teal-text);
+}
+
+.u-log-body {
+  padding: 0.25rem 1.25rem 0.5rem;
+}
+
+@keyframes u-blink {
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Stage directions read as bracketed cues in the log, replacing the short
+   rule the old typewriter treatment used. */
+.u-transcript-line[data-kind='stage'] {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blend-teal);
+}
+
+.u-transcript-line[data-kind='stage']::before {
+  content: '[ ';
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+}
+
+.u-transcript-line[data-kind='stage']::after {
+  content: ' ]';
+}
+
+/* --- Memory stage cards --------------------------------------------- */
+.u-stages {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.u-stage {
+  flex: 1;
+  min-width: 9.375rem;
+  position: relative;
+  border: 1px solid rgba(129, 173, 170, 0.35);
+  border-radius: 2px;
+  padding: 1.25rem 1.125rem;
+}
+
+.u-stage[data-gate] {
+  border-color: var(--accent-red);
+}
+
+.u-stage-n {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-text);
+}
+
+.u-stage[data-gate] .u-stage-n {
+  color: var(--accent-red);
+}
+
+.u-stage-tag {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.625rem;
+  background: var(--accent-red);
+  color: var(--ink-black);
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 2px 0.5rem;
+}
+
+.u-stage-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  color: var(--body-white);
+}
+
+.u-stage-body {
+  font-size: 0.78125rem;
+  line-height: 1.6;
+  color: var(--teal-text);
+  margin-top: 0.375rem;
+}
+
+.u-stage-arrow {
+  flex: none;
+  align-self: center;
+  width: 2.5rem;
+  height: auto;
+}
+
+/* The dash pattern repeats every 10 units (4 on, 6 off), so the offset must
+   travel an exact multiple of 10 per cycle or the loop restarts with a
+   visible phase snap — the design animated to -24 and jumped every 1.2s.
+   -10 over 0.5s is the same 20 units/s, seamless. */
+.u-stage-arrow line {
+  stroke: var(--teal-text);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 6;
+  animation: u-dash 0.5s linear infinite;
+}
+
+.u-stage-arrow path {
+  stroke: var(--teal-text);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* Narrow screens: the pipeline stacks and the arrows point down. The arrow's
+   layout box stays 2.5x1.5rem after rotation, so the margin makes room for
+   its rotated extent. */
+@media (max-width: 639px) {
+  .u-stages {
+    flex-direction: column;
+  }
+  .u-stage {
+    min-width: 0;
+    width: 100%;
+  }
+  .u-stage-arrow {
+    transform: rotate(90deg);
+    margin: 0.5rem 0;
+  }
+}
+
+@keyframes u-dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* --- Tier cards ------------------------------------------------------ */
+/* The hatched header band is part of the card, not a page texture, so it
+   is kept; the flagship card carries the same band in accent. */
+.u-tier {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+}
+
+.u-tier[data-flagship] {
+  border: 1.5px solid var(--accent-red);
+}
+
+.u-tier-band {
+  height: 4rem;
+  border-bottom: 1px solid var(--hairline);
+  background: repeating-linear-gradient(45deg, rgba(129, 173, 170, 0.18) 0 3px, transparent 3px 12px);
+}
+
+.u-tier[data-flagship] .u-tier-band {
+  border-bottom-color: rgba(217, 59, 60, 0.4);
+  background: repeating-linear-gradient(45deg, rgba(217, 59, 60, 0.35) 0 3px, transparent 3px 12px);
+}
+
+.u-tier-tag {
+  position: absolute;
+  top: -0.625rem;
+  left: 1.5rem;
+  background: var(--accent-red);
+  color: var(--ink-black);
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 3px 0.625rem;
+}
+
+.u-tier-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1.75rem;
+}
+
+.u-tier-badge {
+  align-self: flex-start;
+  border: 1px solid rgba(129, 173, 170, 0.4);
+  color: var(--teal-text);
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.625rem;
+}
+
+.u-tier[data-flagship] .u-tier-badge {
+  border-color: rgba(217, 59, 60, 0.6);
+  color: var(--accent-red);
+}
+
+.u-tier-name {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  text-transform: uppercase;
+  color: var(--body-white);
+}
+
+.u-tier-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.u-tier-amount {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  letter-spacing: 0.01em;
+  color: var(--body-white);
+}
+
+.u-tier-cta {
+  font-size: 0.6875rem;
+  color: var(--accent-red);
+}
+
+.u-tier-soon {
+  font-size: 0.8125rem;
+  color: var(--teal-text);
+}
+
+.u-tier-copy {
+  font-size: 0.90625rem;
+  line-height: 1.7;
+  color: var(--teal-text);
+}
+
+/* --- Mission reticles (seven, in the gutters) ------------------------ */
+.u-reticle-field {
+  /* The body column's box (max-w-[46rem], centred). Rings position
+     themselves relative to its edges, so their distance from the body is
+     the same on every viewport. */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 46rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Size, period and direction come from the component per ring. Strokes are
+   non-scaling so a 4rem ring keeps the same 1px line as a 12rem one. */
+.u-reticle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  opacity: 0.3;
+  transform-origin: center;
+  animation: u-spin var(--dur, 90s) linear infinite;
+  animation-direction: var(--dir, normal);
+}
+
+.u-reticle circle {
+  fill: none;
+  stroke: var(--teal-text);
+  stroke-width: 1;
+  stroke-dasharray: 4 7;
+  vector-effect: non-scaling-stroke;
+}
+
+.u-reticle .is-centre {
+  fill: var(--accent-red);
+  stroke: none;
+}
+
+@keyframes u-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1279px) {
+  .u-reticle-field { display: none; }
+}
+
+/* --- Side rails (S1 ruler · S3 chevrons · S5 hex register) ----------- */
+/* Fixed to the left edge, mirroring ProgressNav on the right, and hidden
+   at the same breakpoint. Clears the navbar and the bottom safe area. */
+.u-rail {
+  position: fixed;
+  left: 1.25rem;
+  top: calc(var(--nav-total) + 2rem);
+  bottom: var(--rail-bottom, calc(2rem + env(safe-area-inset-bottom, 0px)));
+  width: 1.5rem;
+  z-index: 45;
+  pointer-events: none;
+}
+
+.u-rail-ticks,
+.u-rail-chevrons,
+.u-rail-hex {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.u-rail-tick {
+  width: 0.5625rem;
+  height: 1.5px;
+  background: rgba(129, 173, 170, 0.3);
+}
+
+.u-rail-tick[data-major] {
+  width: 1.125rem;
+  background: rgba(129, 173, 170, 0.55);
+}
+
+/* The accent line: `top` is written by the scroll listener as 0–100%. */
+.u-rail-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.125rem;
+  height: 3px;
+  background: var(--accent-red);
+  transform: translateY(-50%);
+  transition: top 120ms linear;
+}
+
+.u-rail-chevron {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-right: 1.5px solid rgba(129, 173, 170, 0.5);
+  border-bottom: 1.5px solid rgba(129, 173, 170, 0.5);
+  transform: rotate(45deg);
+}
+
+.u-rail-hex {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.u-rail-hex-word {
+  color: rgba(129, 173, 170, 0.5);
+}
+
+.u-rail-hex-word[data-accent] {
+  color: var(--accent-red);
+}
+
+@media (max-width: 900px) {
+  .u-rail {
+    display: none;
+  }
+}
+
+/* --- Corner ornaments (C1 hatch · C2 dots · C3 frames · C6 bracket) --- */
+.u-corner-orn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 5rem;
+  height: 5rem;
+  pointer-events: none;
+}
+
+.u-corner-orn[data-kind='c1'] {
+  background: repeating-linear-gradient(45deg, rgba(129, 173, 170, 0.25) 0 2px, transparent 2px 9px);
+}
+
+.u-corner-orn[data-kind='c2'] {
+  background-image: radial-gradient(rgba(129, 173, 170, 0.5) 1.2px, transparent 1.2px);
+  background-size: 9px 9px;
+}
+
+.u-corner-orn-frame {
+  position: absolute;
+  border: 1px solid;
+}
+
+.u-corner-orn-frame[data-i='0'] {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-color: rgba(129, 173, 170, 0.5);
+}
+
+.u-corner-orn-frame[data-i='1'] {
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-color: rgba(129, 173, 170, 0.35);
+}
+
+.u-corner-orn-frame[data-i='2'] {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-color: rgba(129, 173, 170, 0.25);
+}
+
+.u-corner-orn-square {
+  position: absolute;
+  bottom: 2.25rem;
+  right: 2.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--accent-red);
+}
+
+.u-corner-orn-bracket {
+  position: absolute;
+  bottom: 0.625rem;
+  right: 0.625rem;
+  width: 1.625rem;
+  height: 1.625rem;
+  border-bottom: 2px solid var(--accent-red);
+  border-right: 2px solid var(--accent-red);
+}
+
+.u-corner-orn-dot {
+  position: absolute;
+  bottom: 1.375rem;
+  right: 1.375rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  background: var(--accent-red);
+  animation: u-blink 1.4s step-end infinite;
+}
+
+/* --- Reduced motion --------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .u-corner-orn-dot {
+    animation: none;
+  }
+
+  .u-rail-marker {
+    transition: none;
+  }
+
+  .u-glitch-base,
+  .u-glitch-r,
+  .u-glitch-t,
+  .u-log-dot,
+  .u-stage-arrow line,
+  .u-reticle {
+    animation: none;
+  }
+
+  .u-glitch-r,
+  .u-glitch-t,
+  .u-glitch-pop {
+    display: none;
+  }
+
+
+}

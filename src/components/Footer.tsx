@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { PATENT_URL, PRIVACY_PDF_URL, TERMS_PDF_URL, WHITEPAPER_PDF_URL } from '../config';
 
 /** Footer strip: brand mark, copyright line, and route links over a hairline. */
 export default function Footer() {
@@ -13,21 +13,41 @@ export default function Footer() {
           © 2026 UNTETHER · BUILT LOCALLY IN CHENNAI.
         </p>
 
-        <nav className="flex w-full items-center justify-center gap-6 sm:w-auto" aria-label="Footer">
-          <Link
-            to="/#trust"
-            className="u-annotation u-hit transition-colors text-sm duration-ui ease-mech hover:text-accent"
-            data-cursor="link"
-          >
-            SECURITY WHITEPAPER
-          </Link>
-          <Link
-            to="/memory"
-            className="u-annotation u-hit transition-colors text-sm duration-ui ease-mech hover:text-accent"
-            data-cursor="link"
-          >
-            MEMORY SYSTEM
-          </Link>
+        {/* Two tiers: the product links lead; the legal links sit beneath them,
+            a step smaller and dimmer. */}
+        <nav
+          className="flex w-full flex-col items-center gap-2 sm:w-auto sm:items-end"
+          aria-label="Footer"
+        >
+          {/* Never wraps: on narrow screens the size, tracking and gap step down so both fit one line. */}
+          <div className="flex flex-nowrap items-center justify-center gap-4 sm:gap-6">
+            <a href={WHITEPAPER_PDF_URL} className="u-annotation u-hit whitespace-nowrap transition-colors text-xs tracking-[0.12em] sm:text-sm sm:tracking-[0.2em] duration-ui ease-mech hover:text-accent" data-cursor="link">
+              SECURITY WHITEPAPER
+            </a>
+            <a href={PATENT_URL} className="u-annotation u-hit whitespace-nowrap transition-colors text-xs tracking-[0.12em] sm:text-sm sm:tracking-[0.2em] duration-ui ease-mech hover:text-accent" data-cursor="link">
+              MEMORY PATENT
+            </a>
+          </div>
+          <div className="flex flex-nowrap items-center justify-center gap-5" style={{ opacity: 0.7 }}>
+            <a
+              href={PRIVACY_PDF_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+              data-cursor="link"
+            >
+              PRIVACY POLICY
+            </a>
+            <a
+              href={TERMS_PDF_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="u-annotation u-hit transition-colors duration-ui ease-mech hover:text-accent"
+              data-cursor="link"
+            >
+              TERMS &amp; CONDITIONS
+            </a>
+          </div>
         </nav>
       </div>
     </footer>

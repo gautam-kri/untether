@@ -36,7 +36,7 @@ export default function ServerIllustration({
           y="41"
           textAnchor="middle"
           style={{
-            fontFamily: '"TT2020 StyleB", Georgia, serif',
+            fontFamily: 'var(--font-display)',
             fontSize: 9,
             letterSpacing: '0.12em',
             fill: 'var(--body-white)',

@@ -40,8 +40,8 @@ export default function Button(props: ButtonProps) {
     height: '44px',
     padding: '15px',
     fontSize: '0.9rem',
-    letterSpacing: '0.1em',
-    fontWeight: 500,
+    letterSpacing: '0.12em',
+    fontWeight: 700,
   } as const;
 
   if ('to' in props && props.to !== undefined) {

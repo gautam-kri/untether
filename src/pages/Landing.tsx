@@ -13,6 +13,7 @@
  */
 import WipeContainer from '../components/WipeContainer';
 import ProgressNav from '../components/ProgressNav';
+import { LandingRail } from '../components/SideRail';
 import HeroSection from '../sections/HeroSection';
 import TwoWallsSection from '../sections/TwoWallsSection';
 import MemorySection from '../sections/MemorySection';
@@ -35,6 +36,7 @@ export default function Landing() {
   return (
     <>
       <WipeContainer sections={sections} />
+      <LandingRail />
       <ProgressNav />
     </>
   );

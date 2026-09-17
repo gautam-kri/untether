@@ -1,15 +1,19 @@
 /*
- * Trust & Security (Threat Model) page.
+ * Trust & Security (Threat Model) section.
  *
  * A deep-dive into the privacy properties of the Untether system —
  * hardware switches, consent logic, local processing, and open foundations.
- * Built as a standard scrolling page (`PageShell`) with staggered reveal
- * animations for the policy blocks.
+ * Rendered as a landing wipe panel via `SectionShell`. The background carries
+ * the eye that never records (`TrustEyeIllustration`), which shutters itself
+ * once when the section is first shown.
  */
 import { useEffect } from 'react';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
+import SectionNumeral from '../components/SectionNumeral';
 import Button from '../components/Button';
+import TrustEyeIllustration from '../illustrations/TrustEyeIllustration';
+import CornerOrnament from '../components/CornerOrnament';
 import { Reveal } from '../lib/reveal';
 import { GITHUB_URL } from '../config';
 // WHITEPAPER_PDF_URL is paired with the commented whitepaper link below.
@@ -65,9 +69,20 @@ export default function TrustSection() {
 
   return (
     <SectionShell fitMinScale={0.9}>
+      <SectionNumeral n="03" />
+      {/* 4rem of CTA padding minus C3's 0.5rem ink inset: frame bottom = button bottom */}
+      <CornerOrnament kind="c3" offset="3.5rem" />
       <div className="max-w-[90rem]">
-        <Reveal index={0}>
-          <Kicker>SECURITY & THREAT MODEL</Kicker>
+        {/* The eye that never records — inline, centred, full strength. It
+            plays its one-shot shutter sequence on reveal and keeps its box
+            afterwards so the heading below never shifts. */}
+        <Reveal index={0} className="flex justify-center">
+          <div className="w-[7rem]">
+            <TrustEyeIllustration />
+          </div>
+        </Reveal>
+        <Reveal index={1}>
+          <Kicker>03 / Security &amp; threat model</Kicker>
         </Reveal>
         <Reveal index={1} className="mt-5">
           <SectionHeading as="h1">Audit the machine that knows you.</SectionHeading>
@@ -77,13 +92,31 @@ export default function TrustSection() {
           yours — in hardware, in consent, in transit, and at rest.
         </Reveal>
 
-        <div className="mt-12 mx-auto max-w-[35rem]">
-          <img
-            src="/images/aperture.webp"
-            alt="Untether Aperture — sensor-pure glasses"
-            className="u-media-blend"
-          />
-          <p className="u-annotation mt-3 text-center text-sm">APERTURE · THE CAMERA THAT NEVER RECORDS</p>
+        <div className="mt-12 grid items-center gap-10 sm:grid-cols-2">
+          <figure className="m-0">
+            <img
+              src="/images/hero-glasses-2k.webp"
+              alt="Untether Aperture — sensor-pure glasses"
+              className="u-media-blend"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption className="u-annotation mt-3 text-center text-sm">
+              APERTURE · THE CAMERA THAT NEVER RECORDS
+            </figcaption>
+          </figure>
+          <figure className="m-0">
+            <img
+              src="/images/vault.png"
+              alt="Untether Vault — the appliance your memory runs on"
+              className="u-media-blend"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption className="u-annotation mt-3 text-center text-sm">
+              VAULT · THE MACHINE YOUR MEMORY RUNS ON
+            </figcaption>
+          </figure>
         </div>
 
         <div className="mt-14 flex flex-col">
@@ -91,10 +124,13 @@ export default function TrustSection() {
             <Reveal
               key={s.n}
               index={3 + i}
-              className="grid gap-3 py-8 min-[700px]:grid-cols-[11.25rem_1fr]"
+              className="grid items-start gap-3 py-8 min-[700px]:grid-cols-[11.25rem_1fr]"
               style={{ borderTop: '1px solid var(--hairline)' }}
             >
-              <h2 className="u-display u-tile-title">
+              {/* Cap-tops aligned, not baselines: Anton's cap is ~2x Chakra's, so a
+                  shared baseline leaves the body starting ~13px below the title.
+                  0.19em = (body cap-top 0.49em x 0.64 size ratio) - title cap-top 0.123em. */}
+              <h2 className="u-display u-tile-title" style={{ paddingTop: '0.19em' }}>
                 <span style={{ color: 'var(--accent-red)' }}>{s.n}</span> {s.title}
               </h2>
               <p className="u-body u-body-teal" style={{ maxWidth: 'none' }}>
@@ -104,7 +140,7 @@ export default function TrustSection() {
           ))}
         </div>
 
-        <Reveal index={10} className="my-6 flex flex-wrap items-center gap-6">
+        <Reveal index={10} className="mt-6 pb-16 flex flex-wrap items-center gap-6">
           <Button to="/partners" variant="primary">
             BECOME A DESIGN PARTNER
           </Button>

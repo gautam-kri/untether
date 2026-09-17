@@ -62,11 +62,15 @@ export default function WipeContainer({ sections }: WipeContainerProps) {
       clearTimers();
       beginTransition();
       landingNav.setAnimating(true);
-      landingNav.setIndex(target); // progress nav advances at transition start
       window.history.replaceState(null, '', SECTIONS[target].hash);
 
+      // The index is published at the same instant the section swaps, not at
+      // transition start — so the navbar, progress nav and side rail change
+      // under the bars and are revealed with the new section, rather than
+      // jumping half a second ahead of it.
       if (reduced) {
         setOutgoing(from);
+        landingNav.setIndex(target);
         setActive(target);
         timers.current.push(
           window.setTimeout(() => {
@@ -83,7 +87,14 @@ export default function WipeContainer({ sections }: WipeContainerProps) {
       // Instant swap under full cover — a visibility toggle on already-mounted
       // sections, run inside rAF so it lands cleanly between animation frames.
       timers.current.push(
-        window.setTimeout(() => window.requestAnimationFrame(() => setActive(target)), SWAP_AT),
+        window.setTimeout(
+          () =>
+            window.requestAnimationFrame(() => {
+              landingNav.setIndex(target);
+              setActive(target);
+            }),
+          SWAP_AT,
+        ),
       );
       timers.current.push(
         window.setTimeout(() => {

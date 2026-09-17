@@ -15,16 +15,8 @@ export default {
         hairline: 'var(--hairline)',
       },
       fontFamily: {
-        display: [
-          '"URW DIN Arabic Condensed Black"',
-          '"URW DIN Arabic Cond"',
-          '"URW DIN Arabic"',
-          '"Bahnschrift"',
-          '"Arial Narrow"',
-          'system-ui',
-          'sans-serif',
-        ],
-        base: ['"TT2020 Base"', 'ui-monospace', 'monospace'],
+        display: ['var(--font-display)'],
+        base: ['var(--font-body)'],
       },
       borderRadius: {
         DEFAULT: '2px',

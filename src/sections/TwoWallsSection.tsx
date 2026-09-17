@@ -14,6 +14,7 @@ import type { CSSProperties } from 'react';
 import SectionShell from '../components/SectionShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
+import SectionNumeral from '../components/SectionNumeral';
 import { Reveal, useReveal } from '../lib/reveal';
 
 /** `it` — Aperture speaking. `you` — the user. `stage` — a stage direction. */
@@ -146,34 +147,57 @@ const BLOCKS = [
 function Transcript() {
   const ref = useRef<HTMLUListElement>(null);
   const revealed = useReveal(ref);
+  const first = TRANSCRIPT[0].time;
+  const last = TRANSCRIPT[TRANSCRIPT.length - 1].time;
+  const count = String(TRANSCRIPT.length).padStart(2, '0');
 
   return (
-    <ul ref={ref} className="u-transcript" data-revealed={revealed ? 'true' : 'false'}>
-      {TRANSCRIPT.map((entry, i) => (
-        <li key={entry.time} className="u-transcript-entry" style={{ '--i': i } as CSSProperties}>
-          <time className="u-transcript-time" dateTime={entry.time}>
-            {entry.time}
-          </time>
-          <div>
-            {entry.lines.map((line, j) => (
-              <p key={j} className="u-transcript-line" data-kind={line.kind}>
-                <span className="sr-only">{SPEAKER[line.kind]} </span>
-                {line.text}
-              </p>
-            ))}
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="u-log">
+      {/* Log header — entry count and time span are derived from the data,
+          so the panel can never disagree with the transcript beneath it. */}
+      <div className="u-log-head" aria-hidden="true">
+        <div className="u-log-title">
+          <span className="u-log-dot" />
+          <span>Aperture.log — Tuesday</span>
+        </div>
+        <div className="u-log-meta">
+          <span>{count} entries</span>
+          <span>
+            {first} → {last}
+          </span>
+          <span className="is-live">Distilled · Destroyed</span>
+        </div>
+      </div>
+      <div className="u-log-body">
+        <ul ref={ref} className="u-transcript" data-revealed={revealed ? 'true' : 'false'}>
+          {TRANSCRIPT.map((entry, i) => (
+            <li key={entry.time} className="u-transcript-entry" style={{ '--i': i } as CSSProperties}>
+              <time className="u-transcript-time" dateTime={entry.time}>
+                {entry.time}
+              </time>
+              <div>
+                {entry.lines.map((line, j) => (
+                  <p key={j} className="u-transcript-line" data-kind={line.kind}>
+                    <span className="sr-only">{SPEAKER[line.kind]} </span>
+                    {line.text}
+                  </p>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
 export default function TwoWallsSection() {
   return (
     <SectionShell fitMinScale={0.9}>
+      <SectionNumeral n="01" />
       <div className="max-w-[90rem]">
         <Reveal index={0}>
-          <Kicker>One Tuesday</Kicker>
+          <Kicker>01 / One Tuesday</Kicker>
         </Reveal>
         <Reveal index={1} className="mt-5">
           <SectionHeading>You’ve never had an assistant this good. Nobody has.</SectionHeading>
@@ -232,7 +256,7 @@ export default function TwoWallsSection() {
       <Reveal
         index={9}
         as="p"
-        className="u-body u-body-teal mt-10"
+        className="u-body u-body-teal mt-10 pb-16"
         style={{ fontSize: '0.9375rem', maxWidth: '72ch' }}
       >
         It never sends, never speaks for you, and never acts without your thumb. The judgment stays

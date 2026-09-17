@@ -1,5 +1,9 @@
 @import './styles/tokens.css';
 @import './styles/illustrations.css';
+@import './styles/design-import.css';
+@import './styles/hero-texture.css';
+@import './styles/trust-eye.css';
+@import './styles/hero-glitch.css';
 
 @tailwind base;
 @tailwind components;
@@ -9,53 +13,44 @@
 /* Fonts                                                               */
 /* ------------------------------------------------------------------ */
 @font-face {
-  font-family: 'TT2020 StyleB';
-  src: url('/fonts/TT2020StyleB-Regular.woff2') format('woff2');
+  font-family: 'Anton';
+  src: url('/fonts/Anton-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Chakra Petch ships real weights, so the old trick of aliasing a second
+   typewriter cut in at 500 is gone — 500 is now simply a medium. */
+@font-face {
+  font-family: 'Chakra Petch';
+  src: url('/fonts/ChakraPetch-400.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'TT2020 StyleB';
-  src: url('/fonts/TT2020StyleB-Italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'TT2020 Base';
-  src: url('/fonts/TT2020Base-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'TT2020 Base';
-  src: url('/fonts/TT2020Base-Italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* StyleB is aliased into the Base family at weight 500 so it can be reached
-   with `font-medium` / `fontWeight: 500` instead of a family swap. It is a
-   different typewriter cut, not a heavier one — the weight is just the handle. */
-@font-face {
-  font-family: 'TT2020 Base';
-  src: url('/fonts/TT2020StyleB-Regular.woff2') format('woff2');
+  font-family: 'Chakra Petch';
+  src: url('/fonts/ChakraPetch-500.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'TT2020 Base';
-  src: url('/fonts/TT2020StyleB-Italic.woff2') format('woff2');
-  font-weight: 500;
-  font-style: italic;
+  font-family: 'Chakra Petch';
+  src: url('/fonts/ChakraPetch-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  src: url('/fonts/ChakraPetch-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -89,7 +84,7 @@
     overflow-x: hidden;
     background-color: var(--ink-black);
     color: var(--body-white);
-    font-family: 'TT2020 Base', ui-monospace, monospace;
+    font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -120,27 +115,44 @@
 /* Typography helpers                                                  */
 /* ------------------------------------------------------------------ */
 @layer components {
+  /* Anton ships a single weight and is already condensed, so no font-weight
+     or font-stretch here — asking for 900 or 75% would only make the browser
+     synthesise a smeared, mechanically-squashed face. */
   .u-display {
-    font-family: 'URW DIN Arabic Condensed Black', 'URW DIN Arabic Cond', 'URW DIN Arabic',
-      'Bahnschrift', 'Arial Narrow', system-ui, sans-serif;
-    font-stretch: 75%;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     color: var(--body-white);
-    line-height: 1.02;
+    /* Adjustable per call site: set `--display-leading` on the element (or any
+       ancestor) to retune the leading without overriding `line-height` and
+       losing the rest of this rule. 0.98 suits the hero, where the type is
+       large enough that tight leading reads as deliberate. */
+    line-height: var(--display-leading, 0.98);
   }
 
   .u-section-heading {
     font-size: clamp(2.25rem, 5vw, 4rem);
   }
 
+  /* The hero opens the page and no longer shares the stage with a wordmark,
+     so it sits a full step above a section heading — 3e sets it at 84px
+     against a 1440 frame, and the ceiling tracks the fluid root from there. */
+  .u-hero-heading {
+    font-size: clamp(2.75rem, 6vw, 5.25rem);
+  }
+
+  /* Tile titles routinely wrap to two or three lines in narrow columns, and
+     the hero's 0.98 is far too tight at this size — it's a leading meant for
+     84px type, not 30px. Override `--display-leading` at the call site for
+     anything that needs more or less air. */
   .u-tile-title {
-    font-size: 1.75rem;
+    font-size: 1.875rem;
+    --display-leading: 1.12;
   }
 
   .u-body {
-    font-family: 'TT2020 Base', ui-monospace, monospace;
+    font-family: var(--font-body);
     font-size: 1.2rem;
     line-height: 1.7;
     color: var(--body-white);
@@ -151,9 +163,12 @@
     color: var(--teal-text);
   }
 
+  /* Small, heavily-tracked uppercase on a near-black ground needs weight to
+     hold its colour — 400 goes spindly at this size in a sans. */
   .u-annotation {
-    font-family: 'TT2020 Base', ui-monospace, monospace;
+    font-family: var(--font-body);
     text-transform: uppercase;
+    font-weight: 600;
     font-size: 0.6875rem;
     letter-spacing: 0.2em;
     color: var(--teal-text);
@@ -179,16 +194,20 @@
   pointer-events: none;
 }
 
+/* Direction 3e centres the product behind the text rather than pushing it
+   off the right edge: 74% wide, nudged up so the frames sit behind the
+   headline, knocked back to 0.45 and blended `lighten` so the image's own
+   black ground drops out against the page. */
 .u-hero-glasses-box {
   --rx: 0%;
   position: absolute;
-  top: 65%;
-  /* Increased from 50% to move the glasses down */
-  right: -20%;
-  width: 68%;
-  max-width: 7200px;
+  top: 50%;
+  left: 50%;
+  width: 74%;
   aspect-ratio: 1 / 1;
-  transform: translateY(-50%);
+  transform: translate(-50%, -42%);
+  opacity: 0.45;
+  mix-blend-mode: lighten;
 }
 
 .u-hg-skin,
@@ -209,27 +228,28 @@
   clip-path: inset(0 calc(100% - var(--rx)) 0 0);
 }
 
-/* Left-side scrim so the headline stays legible over the visual. */
+/* 3e's scrim runs vertically, not from the left: a touch of shade at the
+   very top, clear through the headline band at 40%, then ramping to solid
+   so the product dissolves into the page above the fold rather than being
+   cut off by it. */
 .u-hero-scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(90deg,
-      var(--ink-black) 0%,
-      var(--ink-black) 22%,
-      rgba(6, 6, 6, 0.55) 45%,
-      rgba(6, 6, 6, 0) 72%);
+  background: linear-gradient(180deg,
+      rgba(6, 6, 6, 0.2) 0%,
+      rgba(6, 6, 6, 0) 40%,
+      rgba(6, 6, 6, 0.85) 82%,
+      var(--ink-black) 100%);
 }
 
+/* Narrow screens: let the product bleed wider and sit further back, so the
+   centred stack keeps its contrast. The scrim needs no override now that it
+   runs vertically — it works at any width. */
 @media (max-width: 1023px) {
   .u-hero-glasses-box {
-    width: 116%;
-    right: -22%;
-    opacity: 0.32;
-  }
-
-  .u-hero-scrim {
-    background: linear-gradient(90deg, var(--ink-black) 10%, rgba(6, 6, 6, 0.35) 100%);
+    width: 130%;
+    opacity: 0.28;
   }
 }
 
@@ -437,7 +457,7 @@
   border-bottom: 1.5px solid var(--hairline);
   border-radius: 2px;
   color: var(--body-white);
-  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.6;
   padding: 8px 2px;
@@ -480,25 +500,26 @@
 }
 
 .u-brand-text {
-  /* Text is scaled up so its cap-height perfectly matches the logo */
-  font-size: calc(var(--brand-size) * (70 / 60));
+  /* Anton: cap height is 0.859em, so this makes the wordmark's caps exactly
+     as tall as the mark's ink (0.958 of its box; it is inset 16/778 top and bottom). At line-height = brand-size
+     Anton's caps already sit centred on the box (cap-top -0.007, baseline
+     0.993), so unlike the old display face there is no vertical nudge. */
+  font-size: calc(var(--brand-size) * 1.116);
   line-height: var(--brand-size);
-  /* Nudge down slightly to vertically center the cap-height */
-  transform: translateY(calc(var(--brand-size) * (4 / 60)));
   white-space: nowrap;
+  /* Open the wordmark up. Letter-spacing is added after the LAST glyph too,
+     so the negative margin pulls that trailing gap back off and keeps the
+     lockup optically centred in the navbar. */
+  letter-spacing: 0.08em;
+  margin-right: -0.08em;
 }
 
-/* Responsive scaling for the two instances */
+/* Responsive scaling — navbar only; the hero carries no wordmark in 3e. */
 .u-nav-brand {
   /* Navbar: 38px on small phones, 45px at the 16px base — in rem so the
      lockup rides the fluid root instead of staying 45px on a 2560px screen.
      Its 5vw term already tops out at a 900px viewport. */
   --brand-size: clamp(2.375rem, 5vw, 2.8125rem);
-}
-
-.u-hero-brand {
-  /* Hero: large and dramatic */
-  --brand-size: clamp(4rem, 10vw, 8rem);
 }
 
 /* Hero motion */
@@ -834,11 +855,16 @@
   padding-top: 0;
 }
 
-/* Tabular figures so the column of times stays a straight edge. Its
-   line-height is set in absolute units to match the first line's box,
-   which top-aligns the two columns without a magic offset. */
+/* The times are left-aligned in a fixed gutter, so their LEFT edge is the
+   straight one — which is the edge that matters here. Chakra Petch has no
+   `tnum` feature and its digits are genuinely proportional (1 is 0.358em
+   against 0 at 0.628em), so the declaration below is inert for the brand
+   face and only bites for a fallback; the right edge of the column is
+   very slightly ragged by design. Its line-height is set in absolute units
+   to match the first line's box, which top-aligns the two columns without
+   a magic offset. */
 .u-transcript-time {
-  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-family: var(--font-body);
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum' 1;
   font-size: 1rem;
@@ -852,7 +878,7 @@
 .u-transcript-line {
   position: relative;
   padding-left: 1.5rem;
-  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   line-height: 1.65;
 }

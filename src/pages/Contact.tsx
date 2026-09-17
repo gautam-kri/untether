@@ -14,7 +14,6 @@ import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
-import ShutterEyeIllustration from '../illustrations/ShutterEyeIllustration';
 import { Reveal } from '../lib/reveal';
 import { CONTACT_EMAIL } from '../config';
 
@@ -90,9 +89,6 @@ export default function Contact() {
           <div>
             {sent ? (
               <div className="flex flex-col items-start">
-                <div style={{ width: '120px', height: '80px' }} className="text-body">
-                  <ShutterEyeIllustration />
-                </div>
                 <p className="u-body mt-6">
                   Message received. We read everything ourselves — expect a reply from a human.
                 </p>

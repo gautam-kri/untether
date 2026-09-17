@@ -44,8 +44,8 @@ export default function HeroGlasses() {
   return (
     <div className="u-hero-glasses" aria-hidden="true">
       <div ref={boxRef} className="u-hero-glasses-box">
-        <img src="/images/hero-glasses.webp" alt="" className="u-hg-skin" />
-        <img src="/images/hero-wireframe.webp" alt="" className="u-hg-wire" />
+        <img src="/images/hero-glasses-2k.webp" alt="" className="u-hg-skin" />
+        <img src="/images/hero-wireframe-2k.webp" alt="" className="u-hg-wire" />
       </div>
     </div>
   );

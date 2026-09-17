@@ -8,7 +8,7 @@ interface SectionHeadingProps {
   hero?: boolean;
 }
 
-/** Display heading in the TT2020 StyleB face at the section-heading scale. */
+/** Display heading in the Anton face at the section-heading scale. */
 export default function SectionHeading({
   children,
   as: Tag = 'h2',

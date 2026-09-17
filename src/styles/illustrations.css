@@ -43,7 +43,8 @@
 }
 
 .u-illus-anno {
-  font-family: 'TT2020 Base', ui-monospace, monospace;
+  font-family: var(--font-body);
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   fill: var(--teal-text);

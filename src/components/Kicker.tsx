@@ -5,6 +5,8 @@ interface KickerProps {
   className?: string;
   /** Omit the leading rule (used where a kicker doubles as a role label). */
   noRule?: boolean;
+  /** Mirror the rule on the trailing side — the centred treatment in 3e. */
+  flank?: boolean;
 }
 
 /**
@@ -14,7 +16,7 @@ interface KickerProps {
  * `FitScale`) whenever its natural width would exceed the space available,
  * so it always fits within its container/screen on one line.
  */
-export default function Kicker({ children, className, noRule }: KickerProps) {
+export default function Kicker({ children, className, noRule, flank }: KickerProps) {
   const outer = useRef<HTMLParagraphElement>(null);
   const inner = useRef<HTMLSpanElement>(null);
   const [scale, setScale] = useState(1);
@@ -47,7 +49,7 @@ export default function Kicker({ children, className, noRule }: KickerProps) {
     <p
       ref={outer}
       className={`font-base uppercase text-accent overflow-hidden ${className ?? ''}`}
-      style={{ fontSize: '1rem', letterSpacing: '0.15em', fontWeight: 500, lineHeight: 1 }}
+      style={{ fontSize: '1rem', letterSpacing: '0.25em', fontWeight: 600, lineHeight: 1 }}
     >
       <span
         ref={inner}
@@ -66,6 +68,13 @@ export default function Kicker({ children, className, noRule }: KickerProps) {
           />
         )}
         <span>{children}</span>
+        {!noRule && flank && (
+          <span
+            aria-hidden="true"
+            className="inline-block h-0.5 shrink-0 bg-accent"
+            style={{ width: '24px' }}
+          />
+        )}
       </span>
     </p>
   );

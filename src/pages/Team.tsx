@@ -16,6 +16,7 @@ import PageShell from '../components/PageShell';
 import Kicker from '../components/Kicker';
 import SectionHeading from '../components/SectionHeading';
 import FoundersPhoto from '../components/FoundersPhoto';
+import CornerOrnament from '../components/CornerOrnament';
 import { useReducedMotion } from '../lib/hooks';
 import { Reveal } from '../lib/reveal';
 import { FOUNDER_LINKS } from '../config';
@@ -109,7 +110,8 @@ export default function Team() {
 
   return (
     <PageShell>
-      <div className="mx-auto w-full max-w-5xl px-6 py-20 md:px-10">
+      <div className="relative mx-auto w-full max-w-5xl px-6 py-20 md:px-10">
+        <CornerOrnament kind="c6" />
         <Reveal index={0}>
           <Kicker>TEAM</Kicker>
         </Reveal>

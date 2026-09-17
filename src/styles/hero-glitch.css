@@ -1,0 +1,190 @@
+/* ------------------------------------------------------------------ */
+/* Hero headline glitch — design kit "Spider-Verse", fast and jittery  */
+/* ------------------------------------------------------------------ */
+/* Every layer runs on `steps(1, end)`, so values SNAP between keyframes
+   instead of sliding, and the burst packs ~17 snaps into the first 22% of
+   a 5s clock (about 65ms apiece). Red and teal clones flash in sliced,
+   skewed offsets out of phase with each other; halftone/hatch patches
+   flick on and off INSIDE the letters. The 2s delay holds the first burst
+   until the headline has been read. Reduced-motion handling lives in
+   design-import.css's shared block (same class names). */
+
+/* Shrink-wraps the h1 so the absolute overlays inherit exactly its box. */
+.u-glitch {
+  position: relative;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.u-glitch-base,
+.u-glitch-r,
+.u-glitch-t,
+.u-glitch-pop {
+  animation-duration: 5s;
+  animation-timing-function: steps(1, end);
+  animation-iteration-count: infinite;
+  animation-delay: 2s;
+}
+
+.u-glitch-base {
+  animation-name: u-glitch-base;
+}
+
+.u-glitch-r,
+.u-glitch-t,
+.u-glitch-pop {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.u-glitch-r { animation-name: u-glitch-r; }
+.u-glitch-t { animation-name: u-glitch-t; }
+.u-glitch-pop { animation-name: u-glitch-pop; }
+
+/* Two classes deep ON PURPOSE. The clones also carry `u-display` for the
+   face, and its `color` is emitted after this file (Tailwind hoists
+   @layer components to the @tailwind position), so a single-class rule
+   loses the tie and the clones render white. Only colour lives here —
+   the animations stay single-class so reduced-motion can still cancel them. */
+.u-glitch .u-glitch-r { color: var(--accent-red); }
+.u-glitch .u-glitch-t { color: var(--teal-text); }
+
+@keyframes u-glitch-base {
+  0%, 22%, 100% { transform: none; }
+  1%    { transform: translate(-3px, 1px) skewX(-3deg); }
+  2.5%  { transform: translate(4px, -2px) skewX(2deg); }
+  4%    { transform: translate(-2px, 0); }
+  5.5%  { transform: translate(3px, 2px) skewX(-4deg); }
+  7%    { transform: translate(-4px, -1px); }
+  8.5%  { transform: translate(1px, 1px) skewX(3deg); }
+  10%   { transform: translate(-3px, 0); }
+  11.5% { transform: translate(5px, -1px) skewX(-2deg); }
+  13%   { transform: translate(-1px, 2px); }
+  14.5% { transform: translate(2px, -2px) skewX(1deg); }
+  16%   { transform: translate(-4px, 1px); }
+  17.5% { transform: translate(3px, 0) skewX(-3deg); }
+  19%   { transform: translate(-2px, -1px); }
+  20.5% { transform: translate(1px, 1px); }
+}
+
+@keyframes u-glitch-r {
+  0%, 5.5%, 11%, 16.5%, 22%, 100% { opacity: 0; }
+  1%    { opacity: 0.95; clip-path: inset(4% 0 68% 0);  transform: translate(8px, -2px) skewX(-6deg); }
+  2.5%  { opacity: 0.95; clip-path: inset(52% 0 22% 0); transform: translate(-10px, 2px) skewX(5deg); }
+  4%    { opacity: 0.95; clip-path: inset(76% 0 4% 0);  transform: translate(7px, 0); }
+  6.5%  { opacity: 0.95; clip-path: inset(28% 0 52% 0); transform: translate(-7px, 1px) skewX(-4deg); }
+  8%    { opacity: 0.95; clip-path: inset(10% 0 78% 0); transform: translate(6px, -1px); }
+  9.5%  { opacity: 0.95; clip-path: inset(60% 0 18% 0); transform: translate(-9px, 2px) skewX(6deg); }
+  12%   { opacity: 0.95; clip-path: inset(0 0 84% 0);   transform: translate(9px, 0) skewX(-3deg); }
+  13.5% { opacity: 0.95; clip-path: inset(44% 0 30% 0); transform: translate(-6px, -2px); }
+  15%   { opacity: 0.95; clip-path: inset(70% 0 8% 0);  transform: translate(8px, 1px) skewX(4deg); }
+  17.5% { opacity: 0.95; clip-path: inset(20% 0 60% 0); transform: translate(-8px, 0) skewX(-5deg); }
+  19%   { opacity: 0.95; clip-path: inset(84% 0 0 0);   transform: translate(5px, 2px); }
+  20.5% { opacity: 0.95; clip-path: inset(36% 0 40% 0); transform: translate(-5px, -1px) skewX(3deg); }
+}
+
+@keyframes u-glitch-t {
+  0%, 6.2%, 11.7%, 17.2%, 22.5%, 100% { opacity: 0; }
+  1.7%  { opacity: 0.9; clip-path: inset(38% 0 44% 0); transform: translate(-9px, 2px) skewX(5deg); }
+  3.2%  { opacity: 0.9; clip-path: inset(8% 0 80% 0);  transform: translate(10px, -1px) skewX(-5deg); }
+  4.7%  { opacity: 0.9; clip-path: inset(62% 0 14% 0); transform: translate(-7px, 0); }
+  7.2%  { opacity: 0.9; clip-path: inset(22% 0 60% 0); transform: translate(8px, 2px) skewX(3deg); }
+  8.7%  { opacity: 0.9; clip-path: inset(46% 0 36% 0); transform: translate(-5px, -2px); }
+  10.2% { opacity: 0.9; clip-path: inset(0 0 86% 0);   transform: translate(9px, 1px) skewX(-6deg); }
+  12.7% { opacity: 0.9; clip-path: inset(56% 0 24% 0); transform: translate(-10px, 0) skewX(4deg); }
+  14.2% { opacity: 0.9; clip-path: inset(14% 0 70% 0); transform: translate(6px, -2px); }
+  15.7% { opacity: 0.9; clip-path: inset(78% 0 2% 0);  transform: translate(-8px, 1px) skewX(-3deg); }
+  18.2% { opacity: 0.9; clip-path: inset(30% 0 50% 0); transform: translate(7px, 0) skewX(5deg); }
+  19.7% { opacity: 0.9; clip-path: inset(4% 0 82% 0);  transform: translate(-6px, 2px); }
+  21.2% { opacity: 0.9; clip-path: inset(66% 0 12% 0); transform: translate(4px, -1px) skewX(-4deg); }
+}
+
+/* --- Pop patches, INSIDE the letters ------------------------------------
+   Each patch is a text-shaped copy of the headline. Its pattern is the
+   element's background, clipped to the glyphs (`background-clip: text`,
+   so the copy's own fill is transparent), and a rectangular mask confines
+   the pattern to the patch's region. What shows is glyph ∩ region — never
+   the empty corners of the text box. `background-size` is the pattern's
+   pitch (kept in px: it is texture, not layout); `mask-size` / `mask-position`
+   are the region, in percentages of the headline's box so it tracks the
+   headline at every size. Each flicks twice per burst. */
+.u-glitch .u-glitch-pop {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-repeat: repeat;
+  -webkit-mask-image: linear-gradient(#000 0 0);
+  mask-image: linear-gradient(#000 0 0);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+@keyframes u-glitch-pop {
+  0%, 3.5%, 7.5%, 100% { opacity: 0; }
+  1.5% { opacity: 1; }
+  5%   { opacity: 1; }
+}
+
+/* mask-position is "offset within the remaining space", so a region that
+   should start at L% with width W% needs position L / (100 - W). */
+.u-glitch-pop[data-p='1'] {
+  background-image: radial-gradient(rgba(217, 59, 60, 0.85) 1.6px, transparent 1.6px);
+  background-size: 7px 7px;
+  -webkit-mask-size: 22% 30%; mask-size: 22% 30%;
+  -webkit-mask-position: 3.85% 8.57%; mask-position: 3.85% 8.57%;
+  animation-delay: 2.1s;
+}
+
+.u-glitch-pop[data-p='2'] {
+  background-image: radial-gradient(rgba(129, 173, 170, 0.85) 1.6px, transparent 1.6px);
+  background-size: 6px 6px;
+  -webkit-mask-size: 26% 34%; mask-size: 26% 34%;
+  -webkit-mask-position: 81.08% 3.03%; mask-position: 81.08% 3.03%;
+  animation-delay: 2.4s;
+}
+
+.u-glitch-pop[data-p='3'] {
+  background-image: repeating-linear-gradient(45deg, rgba(129, 173, 170, 0.6) 0 1.5px, transparent 1.5px 6px);
+  -webkit-mask-size: 24% 36%; mask-size: 24% 36%;
+  -webkit-mask-position: 44.74% 84.38%; mask-position: 44.74% 84.38%;
+  animation-delay: 2.7s;
+}
+
+.u-glitch-pop[data-p='4'] {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(217, 59, 60, 0.55) 0 1.5px, transparent 1.5px 7px),
+    repeating-linear-gradient(-45deg, rgba(129, 173, 170, 0.45) 0 1.5px, transparent 1.5px 7px);
+  -webkit-mask-size: 20% 30%; mask-size: 20% 30%;
+  -webkit-mask-position: 5% 82.86%; mask-position: 5% 82.86%;
+  animation-delay: 3s;
+}
+
+.u-glitch-pop[data-p='5'] {
+  background-image: linear-gradient(rgba(129, 173, 170, 0.35), rgba(129, 173, 170, 0.35));
+  -webkit-mask-size: 30% 20%; mask-size: 30% 20%;
+  -webkit-mask-position: 28.57% 37.5%; mask-position: 28.57% 37.5%;
+  animation-delay: 2.25s;
+}
+
+/* --- Sizing ------------------------------------------------------------
+   20ch lets Anton break after "The AI that" on its own. The hero column is
+   `items-center`, which does NOT constrain children's width, so on narrow
+   screens the frame and headline are explicitly capped to the viewport and
+   the frame's padding is tightened. */
+.u-glitch-base {
+  max-width: 20ch;
+}
+
+@media (max-width: 639px) {
+  .u-frame {
+    padding: 1rem 0.75rem;
+    max-width: 100%;
+  }
+  .u-glitch,
+  .u-glitch-base {
+    max-width: 100%;
+  }
+}

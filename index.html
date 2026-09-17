@@ -5,6 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#060606" />
+
+    <!-- Self-hosted brand faces. They are only discovered once the CSS has
+         parsed, so preload the two that render on every page. -->
+    <link rel="preload" href="/fonts/Anton-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ChakraPetch-400.woff2" as="font" type="font/woff2" crossorigin />
     <meta
       name="description"
       content="Untether — a private AI chief of staff built on a memory system that recalls your life with receipts, on hardware you own."

@@ -8,6 +8,12 @@
   --body-white: #f2f1ec;
   --hairline: rgba(129, 173, 170, 0.25);
 
+  /* Brand direction 3e — Anton for display, Chakra Petch for everything else.
+     Declared once here so the two stacks can never drift between index.css,
+     tailwind.config.js and the inline styles in the SVG illustrations. */
+  --font-display: Anton, 'Arial Narrow', 'Bahnschrift', system-ui, sans-serif;
+  --font-body: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
+
   --ease-mech: cubic-bezier(0.76, 0, 0.24, 1);
   --dur-wipe: 700ms;
   --dur-ui: 200ms;

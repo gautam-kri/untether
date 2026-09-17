@@ -51,18 +51,40 @@ const VERTICAL_QUERY = '(max-width: 639.98px)';
 const ACCENT = 'var(--accent-red)';
 
 /**
- * TT2020 Base is monospaced with a 0.547em advance (read off the woff2's
- * `hmtx` table). Knowing it lets the fan align its outer *label edges* to the
- * spine's outer edges instead of its tick centres — with labels of different
- * widths those are not the same thing, and only the former reads as aligned.
- * Recomputed rather than hardcoded so the alignment survives editing
+ * Chakra Petch advance widths in 1/1000 em, read off the 500-weight woff2's
+ * `hmtx` table — the weight `.u-illus-anno` renders at.
+ *
+ * The old typewriter face was monospaced, so a single advance constant was
+ * enough to size any label. Chakra Petch is proportional and its uppercase
+ * spans roughly 99% (I is 256, W is 868), so one average would leave the
+ * fan's outer labels visibly off the spine's edges. Only the characters the
+ * labels actually use are listed; anything else falls back to the mean.
+ *
+ * Knowing real widths is what lets the fan align its outer *label edges* to
+ * the spine's outer edges rather than its tick centres — with labels of
+ * different widths those are not the same thing, and only the former reads
+ * as aligned. Derived rather than hardcoded so it survives editing
  * `FACT_TYPES`.
  */
-const CH_ADVANCE = 0.547;
+const ADVANCE: Record<string, number> = {
+  A: 629, B: 654, C: 639, D: 672, E: 590, F: 560, G: 660, H: 682, I: 256,
+  J: 564, K: 628, L: 545, M: 785, N: 681, O: 684, P: 630, Q: 684, R: 659,
+  S: 621, T: 568, U: 684, V: 634, W: 868, X: 620, Y: 606, Z: 576,
+  ' ': 253, '·': 217,
+};
 
-/** Rendered width of a tracked monospace label: n advances, minus the trailing track. */
+/** Mean uppercase advance, used for any glyph missing from the table above. */
+const ADVANCE_FALLBACK = 630;
+
+/**
+ * Visible width of a tracked label. CSS letter-spacing is added after every
+ * glyph including the last, but the ink stops at the final glyph — so the
+ * visible run carries tracking between glyphs only, hence `length - 1`.
+ */
 function labelWidth(s: string, fontSize: number, tracking: number): number {
-  return s.length * fontSize * (CH_ADVANCE + tracking) - fontSize * tracking;
+  let em = 0;
+  for (const ch of s) em += (ADVANCE[ch] ?? ADVANCE_FALLBACK) / 1000;
+  return fontSize * (em + tracking * Math.max(0, s.length - 1));
 }
 
 interface Props {

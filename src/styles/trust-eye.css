@@ -1,0 +1,132 @@
+/* ------------------------------------------------------------------ */
+/* Trust eye — one-shot sequence                                       */
+/* ------------------------------------------------------------------ */
+/* Rendered by `illustrations/TrustEyeIllustration.tsx`, inline in the Trust
+   content. On reveal (`.is-live`), in order:
+
+     0.4s   X glitches in and out          (u-eye-x,   ~0.9s)
+     1.6s   bars slide in, 120ms apart     (u-eye-bar-in, 0.5s each)
+     2.7s   the whole element glitches out (u-eye-out, 0.6s, then stays gone)
+
+   The element keeps its box after it is gone, so nothing beneath shifts. */
+.u-eye {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Must clip: the bars park outside the viewBox before they slide in. */
+  overflow: hidden;
+}
+
+/* The eye blinks on the design's cycle; bars and X live outside this
+   group so they never blink with it. */
+.u-eye-lids {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: u-eye-blink 6s infinite;
+}
+
+@keyframes u-eye-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(0.08); }
+  96% { transform: scaleY(1); }
+}
+
+/* --- 1. The X ------------------------------------------------------- */
+.u-eye-x {
+  stroke: var(--accent-red);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.u-eye.is-live .u-eye-x {
+  animation: u-eye-x 0.9s steps(1, end) 0.4s 1 both;
+}
+
+@keyframes u-eye-x {
+  0%   { opacity: 0; }
+  8%   { opacity: 0.95; clip-path: inset(10% 0 60% 0); transform: translate(1px, -0.4px); }
+  18%  { opacity: 0.95; clip-path: inset(55% 0 20% 0); transform: translate(-1.2px, 0.4px); }
+  30%  { opacity: 0.95; clip-path: none; transform: none; }
+  55%  { opacity: 0.95; }
+  64%  { opacity: 0.2;  clip-path: inset(30% 0 40% 0); transform: translate(0.8px, 0); }
+  74%  { opacity: 0.9;  clip-path: inset(0 0 70% 0);   transform: translate(-1px, 0.2px); }
+  84%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* --- 2. The shutter bars -------------------------------------------- */
+/* Same material as the wipe: the flat shutter fill with a teal leading
+   edge on the side that travels first. Percent translate is relative to
+   each bar's own box (`transform-box: fill-box`), so 104% is fully clear
+   of the frame. */
+.u-eye-bar {
+  transform-box: fill-box;
+  transform: translateX(-104%);
+}
+
+.u-eye-bar[data-side='r'] {
+  transform: translateX(104%);
+}
+
+.u-eye-bar-fill { fill: var(--shutter-fill); }
+.u-eye-bar-edge { fill: rgba(129, 173, 170, 0.6); }
+
+.u-eye.is-live .u-eye-bar {
+  animation: u-eye-bar-in 0.5s var(--ease-mech) forwards;
+  animation-delay: calc(1.6s + var(--i, 0) * 0.12s);
+}
+
+@keyframes u-eye-bar-in {
+  to { transform: translateX(0); }
+}
+
+/* --- 3. Glitch out --------------------------------------------------- */
+.u-eye.is-live {
+  animation: u-eye-out 0.6s steps(1, end) 2.7s 1 forwards;
+}
+
+@keyframes u-eye-out {
+  0%   { opacity: 1; }
+  15%  { opacity: 1;   clip-path: inset(10% 0 55% 0); transform: translate(-4px, 1px) skewX(-4deg); }
+  30%  { opacity: 0.9; clip-path: inset(50% 0 20% 0); transform: translate(5px, -2px) skewX(3deg); }
+  45%  { opacity: 1;   clip-path: inset(0 0 70% 0);   transform: translate(-6px, 0); }
+  60%  { opacity: 0.3; clip-path: inset(30% 0 30% 0); transform: translate(4px, 1px) skewX(-2deg); }
+  75%  { opacity: 0.8; clip-path: inset(65% 0 5% 0);  transform: translate(3px, -1px); }
+  88%  { opacity: 0.15; clip-path: inset(20% 0 60% 0); transform: translate(-3px, 0); }
+  100% { opacity: 0;   clip-path: none; transform: none; }
+}
+
+/* --- Reduced motion: rest shuttered, nothing plays ------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .u-eye-lids { animation: none; }
+  .u-eye.is-live { animation: none; }
+  .u-eye.is-live .u-eye-x { animation: none; opacity: 0; }
+  .u-eye.is-live .u-eye-bar { animation: none; transform: none; }
+}
+
+/* --- Wrapper: owns the gap below the eye, and collapses it once the eye
+   has glitched out (3.3s), so no dead space is left above the header.
+   One reflow, once, at the end of the sequence. */
+.u-eye-wrap {
+  max-height: 6rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.u-eye-wrap.is-live {
+  animation: u-eye-collapse 0.35s var(--ease-mech) 3.4s 1 forwards;
+}
+
+@keyframes u-eye-collapse {
+  to {
+    max-height: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-eye-wrap.is-live {
+    animation: none;
+  }
+}

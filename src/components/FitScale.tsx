@@ -28,11 +28,19 @@ export default function FitScale({
   children,
   className,
   minScale = 0.55,
+  fill = false,
 }: {
   children: ReactNode;
   className?: string;
   /** Below this scale, scroll instead of shrinking (readability floor). */
   minScale?: number;
+  /**
+   * When the content fits unscaled, stretch it to the full height instead of
+   * centring it — so a child column can push a footer to the bottom. In
+   * scroll mode the content is taller than the box anyway, and the footer
+   * simply follows the content.
+   */
+  fill?: boolean;
 }) {
   const outer = useRef<HTMLDivElement>(null);
   const inner = useRef<HTMLDivElement>(null);
@@ -46,7 +54,10 @@ export default function FitScale({
 
     const measure = () => {
       const avail = o.clientHeight;
-      const natural = i.offsetHeight; // layout height — unaffected by transform
+      // scrollHeight, not offsetHeight: when `fill` stretches the inner box to
+      // the container, offsetHeight would always equal it and overflow could
+      // never be detected. Both are layout heights, unaffected by transform.
+      const natural = Math.max(i.offsetHeight, i.scrollHeight);
       if (!avail || !natural) return;
       const ideal = avail / natural;
       let nextScale = 1;
@@ -70,12 +81,13 @@ export default function FitScale({
     };
   }, []);
 
+  const stretch = fill && !scroll && scale === 1;
   return (
     <div
       ref={outer}
       data-fitscroll={scroll ? 'true' : 'false'}
       className={`u-fit flex w-full justify-center ${
-        scroll ? 'items-start overflow-y-auto' : 'items-center overflow-hidden'
+        scroll ? 'items-start overflow-y-auto' : stretch ? 'items-stretch overflow-hidden' : 'items-center overflow-hidden'
       } ${className ?? ''}`}
     >
       <div
@@ -84,6 +96,7 @@ export default function FitScale({
           transform: scale === 1 ? undefined : `scale(${scale})`,
           transformOrigin: 'center center',
           width: '100%',
+          height: stretch ? '100%' : undefined,
         }}
       >
         {children}
