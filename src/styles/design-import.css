@@ -139,17 +139,6 @@
   color: var(--blend-teal);
 }
 
-.u-transcript-line[data-kind='stage']::before {
-  content: '[ ';
-  position: static;
-  width: auto;
-  height: auto;
-  background: none;
-}
-
-.u-transcript-line[data-kind='stage']::after {
-  content: ' ]';
-}
 
 /* --- Memory stage cards --------------------------------------------- */
 .u-stages {
@@ -244,10 +233,12 @@
   .u-stages {
     flex-direction: column;
   }
+
   .u-stage {
     min-width: 0;
     width: 100%;
   }
+
   .u-stage-arrow {
     transform: rotate(90deg);
     margin: 0.5rem 0;
@@ -406,11 +397,15 @@
 }
 
 @keyframes u-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 1279px) {
-  .u-reticle-field { display: none; }
+  .u-reticle-field {
+    display: none;
+  }
 }
 
 /* --- Side rails (S1 ruler · S3 chevrons · S5 hex register) ----------- */
@@ -420,7 +415,9 @@
   position: fixed;
   left: 1.25rem;
   top: calc(var(--nav-total) + 2rem);
-  bottom: var(--rail-bottom, calc(2rem + env(safe-area-inset-bottom, 0px)));
+  /* `--rail-lift` is written by useFooterLift: how far the footer currently
+     intrudes into the viewport. 0 while the footer is off screen. */
+  bottom: calc(var(--rail-lift, 0px) + 2rem + env(safe-area-inset-bottom, 0px));
   width: 1.5rem;
   z-index: 45;
   pointer-events: none;

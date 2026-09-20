@@ -929,20 +929,6 @@
   }
 }
 
-.u-transcript-line[data-kind='stage'] {
-  color: var(--teal-text);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-}
-
-.u-transcript-line[data-kind='stage']::before {
-  content: '';
-  top: 0.8em;
-  width: 0.75rem;
-  height: 1px;
-  background: var(--blend-teal);
-}
-
 @media (max-width: 600px) {
   .u-transcript-entry {
     grid-template-columns: minmax(0, 1fr);

@@ -212,22 +212,22 @@ export default function TwoWallsSection() {
 
         <Reveal index={4} className="mt-12" style={{ borderTop: '1px solid var(--hairline)' }}>
           <p className="u-display u-pivot-line" style={{ paddingTop: '3rem' }}>
-            That sentence is the entire product.
+            "Are you still buried in work?"
           </p>
         </Reveal>
 
         <Reveal index={5} as="p" className="u-body mt-12">
-          Because here’s the day you’re living now. There’s a list running behind
-          your eyes and it never stops — the deck, the reference call you owe, whether the car got
+          Because here’s the day you’re living now. A list running behind
+          your eyes: the deck, the reference call you owe, whether the car got
           serviced, the bottle for tonight, the thing you promised on Sunday and have half-remembered
           four times without doing. It follows you into dinner and into bed. None of it is hard,
-          which is exactly what makes it expensive:{' '}
-          <strong className="font-medium" style={{ color: 'var(--line-white)' }}>
-            you are running the best mind in your company as a background process for errands.
+          which is exactly what makes it expensive.{' '}
+          <strong className="font-bold" style={{ color: 'var(--line-white)' }}>
+            The best mind in your company is cluttered with background processes.
           </strong>{' '}
-          Aperture takes the list. Not a copy of it — the list. It books what can be booked, chases
+          Aperture takes the list. Not a copy of it. The actual list, and it books what can be booked, chases
           what needs chasing, comes back with{' '}
-          <strong className="font-medium" style={{ color: 'var(--line-white)' }}>
+          <strong className="font-bold" style={{ color: 'var(--line-white)' }}>
             done
           </strong>{' '}
           instead of a question, and puts whatever’s left in front of you at the one moment you
