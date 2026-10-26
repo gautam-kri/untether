@@ -44,8 +44,8 @@ function progressOf(node: Element | null): number {
  * The rail is positioned against the viewport, so it knows nothing about the
  * footer and would otherwise draw straight over it. This measures how far the
  * footer intrudes into the viewport and writes that to `--rail-lift`, which
- * `.u-rail` adds to its bottom offset — so the rail is full height while the
- * footer is off screen and shortens only as the footer comes into view.
+ * `.u-rail` translates itself up by — so the rail stays put while the footer
+ * is off screen and is pushed up, as if scrolled, as the footer comes in.
  *
  * Only for rails whose page genuinely has a visible footer: on the landing
  * page every section stays mounted, so Mission's footer is in the DOM (and

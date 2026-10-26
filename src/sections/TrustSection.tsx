@@ -98,6 +98,12 @@ export default function TrustSection() {
               src="/images/hero-glasses-2k.webp"
               alt="Untether Aperture — sensor-pure glasses"
               className="u-media-blend"
+              // Square art, so a % margin (relative to width) equals % of height.
+              // Margin rather than translate so the content beneath moves too.
+              style={{
+                marginTop: 'var(--glasses-nudge-y)',
+                translate: 'var(--glasses-nudge-x) 0',
+              }}
               loading="lazy"
               decoding="async"
             />
@@ -107,9 +113,13 @@ export default function TrustSection() {
           </figure>
           <figure className="m-0">
             <img
-              src="/images/vault.png"
+              src="/images/vault.webp"
               alt="Untether Vault — the appliance your memory runs on"
               className="u-media-blend"
+              style={{
+                marginTop: 'var(--vault-nudge-y)',
+                translate: 'var(--vault-nudge-x) 0',
+              }}
               loading="lazy"
               decoding="async"
             />

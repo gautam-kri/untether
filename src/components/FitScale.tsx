@@ -29,6 +29,7 @@ export default function FitScale({
   className,
   minScale = 0.55,
   fill = false,
+  top = false,
 }: {
   children: ReactNode;
   className?: string;
@@ -41,6 +42,11 @@ export default function FitScale({
    * simply follows the content.
    */
   fill?: boolean;
+  /**
+   * Pin short content to the top instead of centring it, so its heading
+   * lines up with sections whose content fills the height.
+   */
+  top?: boolean;
 }) {
   const outer = useRef<HTMLDivElement>(null);
   const inner = useRef<HTMLDivElement>(null);
@@ -87,14 +93,20 @@ export default function FitScale({
       ref={outer}
       data-fitscroll={scroll ? 'true' : 'false'}
       className={`u-fit flex w-full justify-center ${
-        scroll ? 'items-start overflow-y-auto' : stretch ? 'items-stretch overflow-hidden' : 'items-center overflow-hidden'
+        scroll
+          ? 'items-start overflow-y-auto'
+          : stretch
+            ? 'items-stretch overflow-hidden'
+            : top
+              ? 'items-start overflow-hidden'
+              : 'items-center overflow-hidden'
       } ${className ?? ''}`}
     >
       <div
         ref={inner}
         style={{
           transform: scale === 1 ? undefined : `scale(${scale})`,
-          transformOrigin: 'center center',
+          transformOrigin: top ? 'top center' : 'center center',
           width: '100%',
           height: stretch ? '100%' : undefined,
         }}

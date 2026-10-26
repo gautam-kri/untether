@@ -11,3 +11,6 @@ dist
 
 # raw source photo — only the graded public/founders.jpg ships
 fondlers.jpg
+
+# 3D models, renders and scratch (Blender pipeline) - local only, never pushed or deployed
+3d/

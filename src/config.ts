@@ -76,7 +76,7 @@ export const TIERS: Tier[] = [
 // Twelve words, shown top to bottom; `accent` is the index drawn in red.
 // Encode whatever you like here; the rail renders exactly these strings.
 export const HEX_REGISTER = {
-  values: ['A17F', '0X3B', '44C2', 'FE01', '9D08', '1B77', 'C4E0', '552A', 'B9F3', '081D', '7E66', 'D30C'],
+  values: ['A17F', '0X3B', '44C2', 'FE01', '9D08', '1B77', '1538', '552A', 'B9F3', '081D', '7E66', 'D30C'],
   accent: 6,
 } as const;
 

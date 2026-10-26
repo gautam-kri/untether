@@ -96,7 +96,7 @@ export default function HeroSection() {
           style={{ maxWidth: '68ch' }}
         >
           Untether is the second brain you wish you had, that hears and sees everything from your
-          emails and your messages to the conversations you had in the hallway, actively guiding you
+          emails and your messages to the conversations you had in the hallway, actively helping you
           every step of the way. It's built on a memory system that actually knows you, and runs
           purely on hardware you own, so it can be trusted with everything.
         </Reveal>

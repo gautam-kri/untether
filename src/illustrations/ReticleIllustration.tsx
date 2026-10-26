@@ -1,6 +1,8 @@
 /**
- * Mission background — seven slow-turning dashed rings with accent centres,
+ * Mission background — ten slow-turning dashed rings with accent centres,
  * peppered through the gutters either side of the centred body column.
+ * The field spans the scrolled content above the footer (not the viewport),
+ * so the rings scroll with the copy and stay spread down its full length.
  *
  * Each ring is the design canvas's reticle with its spokes removed. The
  * field is anchored to the body column itself (see `.u-reticle-field`), so
@@ -36,14 +38,17 @@ interface Ring {
 
 const RINGS: Ring[] = [
   // left gutter, top to bottom
-  { size: '14rem', top: '10%', side: 'L', gap: '0.5rem', dur: '90s' },
-  { size: '5rem', top: '46%', side: 'L', gap: '1.5rem', dur: '50s', reverse: true },
-  { size: '7rem', top: '59%', side: 'L', gap: '0.5rem', dur: '70s' },
-  { size: '5rem', top: '76%', side: 'L', gap: '2.5rem', dur: '55s', reverse: true },
+  { size: '12rem', top: '2%', side: 'L', gap: '0.5rem', dur: '90s' },
+  { size: '5rem', top: '33%', side: 'L', gap: '1.5rem', dur: '50s', reverse: true },
+  { size: '8rem', top: '47%', side: 'L', gap: '0.5rem', dur: '70s' },
+  { size: '5rem', top: '69%', side: 'L', gap: '2.5rem', dur: '55s', reverse: true },
+  { size: '6rem', top: '82%', side: 'L', gap: '1rem', dur: '75s' },
   // right gutter, top to bottom
-  { size: '11rem', top: '12%', side: 'R', gap: '0.75rem', dur: '80s', reverse: true },
-  { size: '8.5rem', top: '48%', side: 'R', gap: '0.5rem', dur: '65s' },
-  { size: '6rem', top: '74%', side: 'R', gap: '3rem', dur: '60s', reverse: true },
+  { size: '10rem', top: '5%', side: 'R', gap: '0.75rem', dur: '80s', reverse: true },
+  { size: '6rem', top: '31%', side: 'R', gap: '2rem', dur: '58s' },
+  { size: '9rem', top: '48%', side: 'R', gap: '0.5rem', dur: '65s', reverse: true },
+  { size: '5rem', top: '72%', side: 'R', gap: '3rem', dur: '60s' },
+  { size: '4rem', top: '85%', side: 'R', gap: '1.25rem', dur: '52s', reverse: true },
 ];
 
 export default function ReticleIllustration() {

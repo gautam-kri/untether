@@ -49,7 +49,7 @@ function StageArrow() {
 
 export default function MemorySection() {
   return (
-    <SectionShell fitMinScale={0.9}>
+    <SectionShell fitMinScale={0.9} top>
       <SectionNumeral n="02" />
       <CornerOrnament kind="c1" />
       <div className="max-w-[90rem]">

@@ -1,35 +1,45 @@
 /* Untether design tokens — palette, easing, and motion primitives. */
 :root {
-  --ink-black: #060606;
-  --accent-red: #d93b3c;
-  --teal-text: #81adaa;
-  --blend-teal: #435c59;
-  --line-white: #ffffff;
-  --body-white: #f2f1ec;
-  --hairline: rgba(129, 173, 170, 0.25);
+   --ink-black: #060606;
+   --accent-red: #d93b3c;
+   --teal-text: #81adaa;
+   --blend-teal: #435c59;
+   --line-white: #ffffff;
+   --body-white: #f2f1ec;
+   --hairline: rgba(129, 173, 170, 0.25);
 
-  /* Brand direction 3e — Anton for display, Chakra Petch for everything else.
+   /* Brand direction 3e — Anton for display, Chakra Petch for everything else.
      Declared once here so the two stacks can never drift between index.css,
      tailwind.config.js and the inline styles in the SVG illustrations. */
-  --font-display: Anton, 'Arial Narrow', 'Bahnschrift', system-ui, sans-serif;
-  --font-body: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
+   --font-display: Anton, 'Arial Narrow', 'Bahnschrift', system-ui, sans-serif;
+   --font-body: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
 
-  --ease-mech: cubic-bezier(0.76, 0, 0.24, 1);
-  --dur-wipe: 700ms;
-  --dur-ui: 200ms;
+   --ease-mech: cubic-bezier(0.76, 0, 0.24, 1);
+   --dur-wipe: 700ms;
+   --dur-ui: 200ms;
 
-  /* Continuous-stroke shutter transition */
-  --shutter-fill: #101312;
-  --shutter-edge: #81adaa;
-  --dur-shutter: 780ms;
-  --dur-route: 600ms;
-  --ease-shutter: cubic-bezier(0.45, 0, 0.55, 1);
+   /* Continuous-stroke shutter transition */
+   --shutter-fill: #101312;
+   --shutter-edge: #81adaa;
+   --dur-shutter: 780ms;
+   --dur-route: 600ms;
+   --ease-shutter: cubic-bezier(0.45, 0, 0.55, 1);
 
-  /* In rem, not px, so the chrome scales with the fluid root (see the
+   /* In rem, not px, so the chrome scales with the fluid root (see the
      `html` rule in index.css) instead of staying laptop-sized on a large
      display. Identical to the old 96px / 34px at the 16px base. */
-  --nav-h: 6rem;
-  --banner-h: 2.125rem;
-  /* Total top offset for content: reservation banner + navbar + iOS safe area */
-  --nav-total: calc(var(--banner-h) + var(--nav-h) + env(safe-area-inset-top, 0px));
+   --nav-h: 6rem;
+   --banner-h: 2.125rem;
+   /* Total top offset for content: reservation banner + navbar + iOS safe area */
+   --nav-total: calc(var(--banner-h) + var(--nav-h) + env(safe-area-inset-top, 0px));
+
+   /* Nudges for product art whose subject sits off-centre in its canvas.
+     Percent of the image's own size; negative y moves it up (and pulls
+     the content beneath up with it), negative x moves it left. */
+   --glasses-nudge-y: -20%;
+   --glasses-nudge-x: 5%;
+   /* hero-glasses + hero-wireframe (trust) */
+   --vault-nudge-y: -20%;
+   --vault-nudge-x: 5%;
+   /* vault (trust) */
 }

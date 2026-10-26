@@ -115,6 +115,7 @@
 /* Typography helpers                                                  */
 /* ------------------------------------------------------------------ */
 @layer components {
+
   /* Anton ships a single weight and is already condensed, so no font-weight
      or font-stretch here — asking for 900 or 75% would only make the browser
      synthesise a smeared, mechanically-squashed face. */
@@ -205,7 +206,7 @@
   left: 50%;
   width: 74%;
   aspect-ratio: 1 / 1;
-  transform: translate(-50%, -42%);
+  transform: translate(-50%, -50%);
   opacity: 0.45;
   mix-blend-mode: lighten;
 }

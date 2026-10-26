@@ -66,7 +66,13 @@
 .u-log {
   border: 1px solid rgba(129, 173, 170, 0.3);
   border-radius: 2px;
-  background: rgba(16, 19, 18, 0.5);
+  /* Opaque equivalent of rgba(16, 19, 18, 0.5) over --ink-black, so
+     background art doesn't show through the log. */
+  background: #0b0d0c;
+  /* Positioned so it stacks above the absolutely-positioned watermark,
+     which would otherwise paint over this (unpositioned) panel. */
+  position: relative;
+  z-index: 1;
 }
 
 .u-log-head {
@@ -155,6 +161,8 @@
   border: 1px solid rgba(129, 173, 170, 0.35);
   border-radius: 2px;
   padding: 1.25rem 1.125rem;
+  /* Solid ground so background art doesn't show through the card. */
+  background: var(--ink-black);
 }
 
 .u-stage[data-gate] {
@@ -357,7 +365,7 @@
   color: var(--teal-text);
 }
 
-/* --- Mission reticles (seven, in the gutters) ------------------------ */
+/* --- Mission reticles (ten, in the gutters) -------------------------- */
 .u-reticle-field {
   /* The body column's box (max-w-[46rem], centred). Rings position
      themselves relative to its edges, so their distance from the body is
@@ -417,7 +425,10 @@
   top: calc(var(--nav-total) + 2rem);
   /* `--rail-lift` is written by useFooterLift: how far the footer currently
      intrudes into the viewport. 0 while the footer is off screen. */
-  bottom: calc(var(--rail-lift, 0px) + 2rem + env(safe-area-inset-bottom, 0px));
+  bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  /* Pushed up by the footer rather than shortened by it, so the rail moves
+     out of the way as if scrolled instead of compressing. */
+  transform: translateY(calc(-1 * var(--rail-lift, 0px)));
   width: 1.5rem;
   z-index: 45;
   pointer-events: none;

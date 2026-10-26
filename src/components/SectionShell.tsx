@@ -24,6 +24,8 @@ interface SectionShellProps {
   center?: boolean;
   /** Readability floor for the fit-scale (higher = scroll sooner on small screens). */
   fitMinScale?: number;
+  /** Pin short content to the top instead of vertically centring it. */
+  top?: boolean;
 }
 
 /** Full-height section scaffold: navbar-safe padding, content auto-fit to view. */
@@ -33,6 +35,7 @@ export default function SectionShell({
   className,
   center,
   fitMinScale,
+  top,
 }: SectionShellProps) {
   return (
     <div
@@ -43,7 +46,7 @@ export default function SectionShell({
       }}
     >
       {bg}
-      <FitScale className="h-full" minScale={fitMinScale}>
+      <FitScale className="h-full" minScale={fitMinScale} top={top}>
         <div
           className={`relative mx-auto w-full max-w-7xl px-6 md:px-10 ${center ? 'text-center' : ''}`}
         >
